@@ -402,12 +402,17 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
 .roviy-open-btn{border-color:#c9d4e8;color:#3c4f8a;background:#f5f7fc}
 .roviy-open-btn:hover{border-color:#7f93cf}
 .roviy-inner{max-width:760px}
-.roviy-img-wrap{margin-top:18px;border-radius:16px;overflow:hidden;border:1px solid var(--rose-l);
+.roviy-tabs{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.roviy-tab{padding:9px 20px;border-radius:999px;border:1.5px solid var(--rose-l);background:#fff;
+  color:var(--rose-d);font-family:'Lora',serif;font-size:14px;cursor:pointer;transition:.25s}
+.roviy-tab:hover{border-color:var(--rose)}
+.roviy-tab.active{background:linear-gradient(135deg,var(--rose),var(--rose-d));color:#fff;border-color:var(--rose-d)}
+.roviy-img-wrap{margin-top:14px;border-radius:16px;overflow:hidden;border:1px solid var(--rose-l);
   background:#f6f0e8;min-height:200px;display:flex;align-items:center;justify-content:center;position:relative}
 .roviy-img-wrap img{display:block;width:100%;height:auto;animation:cardIn .5s ease}
 .roviy-loading{color:var(--ink-soft);font-size:14px;padding:60px 0}
 .roviy-dl{display:flex;align-items:center;justify-content:center;width:100%;margin-top:16px;text-decoration:none}
-@media(max-width:560px){.roviy-inner{padding:20px 12px 24px}}
+@media(max-width:560px){.roviy-inner{padding:20px 12px 24px}.roviy-tab{padding:8px 16px;font-size:13px}}
 .reg-line{font-size:13px;color:var(--ink-soft);margin-top:2px}
 
 /* bismillah-mobil: kichik ekranda chetga chiqmasin */
@@ -516,6 +521,9 @@ html[data-theme="1"] .roviy-img-wrap,html[data-theme="2"] .roviy-img-wrap,html[d
 }
 html[data-theme="1"] .roviy-open-btn,html[data-theme="2"] .roviy-open-btn,html[data-theme="3"] .roviy-open-btn{
   background:var(--bg1); border-color:#3c4a7d; color:#8fa0dd;
+}
+html[data-theme="1"] .roviy-tab,html[data-theme="2"] .roviy-tab,html[data-theme="3"] .roviy-tab{
+  background:var(--bg1); color:var(--ink);
 }
 html[data-theme="1"] .nav-strip,html[data-theme="2"] .nav-strip,html[data-theme="3"] .nav-strip{
   background:color-mix(in srgb, var(--bg1) 90%, transparent);
@@ -5732,6 +5740,11 @@ html[data-theme="1"] .ar-text,html[data-theme="2"] .ar-text,html[data-theme="3"]
       <div class="q-bismillah">&#65021;</div>
       <div class="q-title"><span class="v-cyr">Ровийлар — қайси саҳобадан неча ҳадис ривоят бўлган?</span><span class="v-lat">Roviylar — qaysi sahobadan necha hadis rivoyat bo'lgan?</span><span class="v-ru">Передатчики — сколько хадисов от каждого сподвижника</span></div>
     </div>
+    <div class="roviy-tabs">
+      <button class="roviy-tab active" id="roviyTab-umumiy" onclick="switchRoviy('umumiy')"><span class="v-cyr">Умумий</span><span class="v-lat">Umumiy</span><span class="v-ru">Общее</span></button>
+      <button class="roviy-tab" id="roviyTab-1-20" onclick="switchRoviy('1-20')">1–20</button>
+      <button class="roviy-tab" id="roviyTab-21-42" onclick="switchRoviy('21-42')">21–42</button>
+    </div>
     <div class="roviy-img-wrap" id="roviyImgWrap">
       <div class="roviy-loading" id="roviyLoading"><span class="v-cyr">Юкланмоқда...</span><span class="v-lat">Yuklanmoqda...</span><span class="v-ru">Загрузка...</span></div>
     </div>
@@ -5967,33 +5980,56 @@ function toggleDark(){
 }
 applyDark();
 
-/* ================= ROVIYLAR RASMI (lazy-load) ================= */
-var roviyLoaded = false;
+/* ================= ROVIYLAR RASMLARI (lazy-load, 3 tab) ================= */
+var ROVIY_TABS = {
+  'umumiy': {src:'roviylar.webp', name:'Roviylar-Arbain-Nawawiy.webp'},
+  '1-20':   {src:'roviylar-1-20.webp', name:'Roviylar-1-20.webp'},
+  '21-42':  {src:'roviylar-21-42.webp', name:'Roviylar-21-42.webp'}
+};
+var roviyLoadedTabs = {};
+var roviyCurTab = 'umumiy';
 function openRoviy(){
   document.getElementById('roviyModal').style.display = 'block';
   document.body.style.overflow = 'hidden';
-  if(!roviyLoaded){
-    roviyLoaded = true;
-    var img = new Image();
-    img.src = 'roviylar.webp';
-    img.alt = "Arba'in an-Nawaviy — roviylar statistikasi";
-    img.loading = 'eager';
-    img.onload = function(){
-      var wrap = document.getElementById('roviyImgWrap');
-      wrap.innerHTML = '';
-      wrap.appendChild(img);
-    };
-    img.onerror = function(){
-      document.getElementById('roviyLoading').innerHTML =
-        '<span class="v-cyr">Расмни юклаб бўлмади. Интернет алоқасини текшириб, қайта уриниб кўринг.</span>' +
-        '<span class="v-lat">Rasmni yuklab bo\'lmadi. Internet aloqasini tekshirib, qayta urinib ko\'ring.</span>' +
-        '<span class="v-ru">Не удалось загрузить изображение. Проверьте подключение и попробуйте снова.</span>';
-    };
-  }
+  loadRoviyTab(roviyCurTab);
 }
 function closeRoviy(){
   document.getElementById('roviyModal').style.display = 'none';
   document.body.style.overflow = '';
+}
+function switchRoviy(tab){
+  roviyCurTab = tab;
+  ['umumiy','1-20','21-42'].forEach(function(t){
+    document.getElementById('roviyTab-'+t).classList.toggle('active', t === tab);
+  });
+  loadRoviyTab(tab);
+}
+function loadRoviyTab(tab){
+  var meta = ROVIY_TABS[tab];
+  document.getElementById('roviyDownload').setAttribute('href', meta.src);
+  document.getElementById('roviyDownload').setAttribute('download', meta.name);
+  var wrap = document.getElementById('roviyImgWrap');
+  if(roviyLoadedTabs[tab]){
+    wrap.innerHTML = '';
+    wrap.appendChild(roviyLoadedTabs[tab]);
+    return;
+  }
+  wrap.innerHTML = '<div class="roviy-loading"><span class="v-cyr">Юкланмоқда...</span><span class="v-lat">Yuklanmoqda...</span><span class="v-ru">Загрузка...</span></div>';
+  var img = new Image();
+  img.src = meta.src;
+  img.alt = "Arba'in an-Nawaviy — roviylar statistikasi";
+  img.onload = function(){
+    roviyLoadedTabs[tab] = img;
+    if(roviyCurTab === tab){ wrap.innerHTML = ''; wrap.appendChild(img); }
+  };
+  img.onerror = function(){
+    if(roviyCurTab === tab){
+      wrap.innerHTML = '<div class="roviy-loading">' +
+        '<span class="v-cyr">Расмни юклаб бўлмади. Интернет алоқасини текшириб, қайта уриниб кўринг.</span>' +
+        '<span class="v-lat">Rasmni yuklab bo\'lmadi. Internet aloqasini tekshirib, qayta urinib ko\'ring.</span>' +
+        '<span class="v-ru">Не удалось загрузить изображение. Проверьте подключение и попробуйте снова.</span></div>';
+    }
+  };
 }
 function show(step){
   ['qStep1','qStep2','qStep3'].forEach(function(x){ document.getElementById(x).style.display = (x===step)?'':'none'; });
