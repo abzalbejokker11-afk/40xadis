@@ -10,5 +10,28 @@
   "icons": [
     {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
     {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ],
+  "shortcuts": [
+    {
+      "name": "Mavzular",
+      "short_name": "Mavzu",
+      "description": "Hadislarni mavzu bo'yicha qidirish",
+      "url": "./?open=mavzu",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Savol-javob",
+      "short_name": "Test",
+      "description": "Hadislar bo'yicha test",
+      "url": "./?open=quiz",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Roviylar",
+      "short_name": "Roviylar",
+      "description": "Qaysi sahobadan necha hadis rivoyat bo'lgan",
+      "url": "./?open=roviy",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    }
   ]
 }

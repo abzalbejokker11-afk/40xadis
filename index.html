@@ -95,6 +95,7 @@ h1{
   margin-bottom:14px;overflow:hidden;
   box-shadow:0 3px 16px rgba(168,60,102,.08);
   transition:box-shadow .3s;
+  scroll-margin-top:64px;
 }
 .card.open{box-shadow:0 10px 34px rgba(168,60,102,.18);border-color:var(--rose-l)}
 .card.muq{border:1.5px solid var(--gold-l);background:linear-gradient(150deg,#fffdf6,#fdf6ee)}
@@ -122,6 +123,8 @@ h1{
 .chev{color:var(--rose);font-size:18px;transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
 .card.open .chev{transform:rotate(180deg) scale(1.25);color:var(--gold)}
 .card-body{max-height:0;overflow:hidden;transition:max-height .55s ease}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card.card-in{animation:cardIn .4s ease}
 .inner{padding:6px 24px 26px}
 
 /* ---------- arabic ---------- */
@@ -368,6 +371,43 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
 .rc-x:hover{background:var(--rose-l);color:var(--rose-d)}
 @keyframes chipIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @media(max-width:480px){.fs-btn{width:40px;height:40px;font-size:12.5px}.resume-chip{margin:0 4px 14px;font-size:13px}}
+
+/* ---------- mavzu bo'yicha filtr ---------- */
+.mavzu-open-btn{border-color:#c8e0d4;color:#2e7d54;background:#f4fbf7}
+.mavzu-open-btn:hover{border-color:#5ba885}
+.mavzu-screen{animation:fadeInBg .35s ease}
+@keyframes fadeInBg{from{opacity:0}to{opacity:1}}
+.mavzu-inner{animation:modalPop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes modalPop{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
+.mavzu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
+.mavzu-card{border:1.5px solid var(--rose-l);background:#fdf7fa;border-radius:16px;padding:16px 12px;
+  cursor:pointer;text-align:center;transition:.25s cubic-bezier(.34,1.56,.64,1);font-family:'Lora',serif}
+.mavzu-card:hover{border-color:var(--rose);background:#fbeef4;transform:translateY(-3px) scale(1.03);
+  box-shadow:0 8px 22px rgba(168,60,102,.18)}
+.mavzu-card .mv-icon{font-size:28px;display:block;margin-bottom:8px;transition:transform .3s}
+.mavzu-card:hover .mv-icon{transform:scale(1.15) rotate(-4deg)}
+.mavzu-card .mv-name{font-size:14px;font-weight:600;color:var(--rose-d);line-height:1.3;display:block}
+.mavzu-card .mv-count{font-size:11.5px;color:var(--ink-soft);margin-top:4px;letter-spacing:.05em;display:block}
+.mavzu-chip{
+  max-width:640px;margin:0 auto 18px;display:flex;align-items:center;gap:8px;justify-content:center;
+  background:linear-gradient(135deg,#f4fbf7,#e9f6ef);border:1.5px solid #bfe3cf;border-radius:999px;
+  padding:11px 20px;cursor:pointer;color:#2e7d54;font-size:14px;
+  box-shadow:0 5px 18px rgba(46,125,84,.14);transition:.25s;animation:chipIn .5s ease}
+.mavzu-chip:hover{border-color:#5ba885;transform:translateY(-1px)}
+.mavzu-chip b{color:var(--ink)}
+@media(max-width:560px){.mavzu-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:9px}
+  .mavzu-card{padding:13px 8px}.mavzu-card .mv-icon{font-size:23px}.mavzu-card .mv-name{font-size:12.5px}}
+
+/* ---------- roviylar rasmi ---------- */
+.roviy-open-btn{border-color:#c9d4e8;color:#3c4f8a;background:#f5f7fc}
+.roviy-open-btn:hover{border-color:#7f93cf}
+.roviy-inner{max-width:760px}
+.roviy-img-wrap{margin-top:18px;border-radius:16px;overflow:hidden;border:1px solid var(--rose-l);
+  background:#f6f0e8;min-height:200px;display:flex;align-items:center;justify-content:center;position:relative}
+.roviy-img-wrap img{display:block;width:100%;height:auto;animation:cardIn .5s ease}
+.roviy-loading{color:var(--ink-soft);font-size:14px;padding:60px 0}
+.roviy-dl{display:flex;align-items:center;justify-content:center;width:100%;margin-top:16px;text-decoration:none}
+@media(max-width:560px){.roviy-inner{padding:20px 12px 24px}}
 .reg-line{font-size:13px;color:var(--ink-soft);margin-top:2px}
 
 /* bismillah-mobil: kichik ekranda chetga chiqmasin */
@@ -399,6 +439,105 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
 .pn-btn:hover:not(:disabled){background:var(--rose);color:#fff}
 .pn-btn:disabled{opacity:.4;cursor:default}
 @media(max-width:480px){.nav-chip{flex-basis:31px;height:31px;font-size:12px}.pn-btn{padding:9px 15px;font-size:12.5px}}
+
+/* ================= QORONG'I REJIM (3 daraja) ================= */
+.dark-open-btn{border-color:#cfd3e8;color:#4a4f7d;background:#f5f6fc}
+.dark-open-btn:hover{border-color:#7d84c9}
+html[data-theme="1"],html[data-theme="2"],html[data-theme="3"]{color-scheme:dark}
+
+html[data-theme="1"]{
+  --bg1:#2b2430; --bg2:#241e29; --bg3:#1e1922;
+  --rose:#e08bab; --rose-d:#f2a8c4; --rose-l:#4a3540;
+  --red:#e0708a; --gold:#e0c068; --gold-l:#4a4030;
+  --ink:#eee0e6; --ink-soft:#b8a5b0; --card:#2f2733;
+}
+html[data-theme="2"]{
+  --bg1:#1c171f; --bg2:#171319; --bg3:#121014;
+  --rose:#d97fa0; --rose-d:#ea9bb8; --rose-l:#3d2c36;
+  --red:#d4657e; --gold:#d4b45c; --gold-l:#3d3527;
+  --ink:#e8d9e0; --ink-soft:#a8949f; --card:#221c26;
+}
+html[data-theme="3"]{
+  --bg1:#0d0a0f; --bg2:#0a0810; --bg3:#08060a;
+  --rose:#c8749a; --rose-d:#dd8fae; --rose-l:#2e2130;
+  --red:#c05a72; --gold:#c4a453; --gold-l:#302a1f;
+  --ink:#ddd0d6; --ink-soft:#8f7d88; --card:#141019;
+}
+html[data-theme="1"] body,html[data-theme="2"] body,html[data-theme="3"] body{
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--rose-l) 55%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, color-mix(in srgb, var(--gold-l) 55%, transparent) 0%, transparent 55%),
+    linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+}
+html[data-theme="1"] .quiz-screen,html[data-theme="2"] .quiz-screen,html[data-theme="3"] .quiz-screen{
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--rose-l) 55%, transparent) 0%, transparent 60%),
+    linear-gradient(160deg, var(--bg1), var(--bg2) 45%, var(--bg3));
+}
+html[data-theme="1"] .search-wrap input,html[data-theme="2"] .search-wrap input,html[data-theme="3"] .search-wrap input,
+html[data-theme="1"] .num-wrap input,html[data-theme="2"] .num-wrap input,html[data-theme="3"] .num-wrap input,
+html[data-theme="1"] .memo-btn,html[data-theme="2"] .memo-btn,html[data-theme="3"] .memo-btn,
+html[data-theme="1"] .q-close,html[data-theme="2"] .q-close,html[data-theme="3"] .q-close,
+html[data-theme="1"] .q-input,html[data-theme="2"] .q-input,html[data-theme="3"] .q-input,
+html[data-theme="1"] .q-btn-light,html[data-theme="2"] .q-btn-light,html[data-theme="3"] .q-btn-light,
+html[data-theme="1"] .act-btn,html[data-theme="2"] .act-btn,html[data-theme="3"] .act-btn,
+html[data-theme="1"] .fs-btn,html[data-theme="2"] .fs-btn,html[data-theme="3"] .fs-btn,
+html[data-theme="1"] .nav-chip,html[data-theme="2"] .nav-chip,html[data-theme="3"] .nav-chip,
+html[data-theme="1"] .lang-btn,html[data-theme="2"] .lang-btn,html[data-theme="3"] .lang-btn{
+  background:var(--card); color:var(--ink);
+}
+html[data-theme="1"] .card-head:hover,html[data-theme="2"] .card-head:hover,html[data-theme="3"] .card-head:hover,
+html[data-theme="1"] .muq .card-head:hover,html[data-theme="2"] .muq .card-head:hover,html[data-theme="3"] .muq .card-head:hover,
+html[data-theme="1"] .act-btn:hover,html[data-theme="2"] .act-btn:hover,html[data-theme="3"] .act-btn:hover,
+html[data-theme="1"] .fs-btn:hover,html[data-theme="2"] .fs-btn:hover,html[data-theme="3"] .fs-btn:hover,
+html[data-theme="1"] details.ext,html[data-theme="2"] details.ext,html[data-theme="3"] details.ext,
+html[data-theme="1"] .q-opt,html[data-theme="2"] .q-opt,html[data-theme="3"] .q-opt,
+html[data-theme="1"] .mavzu-card,html[data-theme="2"] .mavzu-card,html[data-theme="3"] .mavzu-card{
+  background:var(--bg1);
+}
+html[data-theme="1"] .m-btn,html[data-theme="2"] .m-btn,html[data-theme="3"] .m-btn,
+html[data-theme="1"] .quiz-open-btn,html[data-theme="2"] .quiz-open-btn,html[data-theme="3"] .quiz-open-btn{
+  background:var(--gold-l);
+}
+html[data-theme="1"] .m-btn:hover,html[data-theme="2"] .m-btn:hover,html[data-theme="3"] .m-btn:hover{background:var(--bg1)}
+html[data-theme="1"] .mavzu-open-btn,html[data-theme="2"] .mavzu-open-btn,html[data-theme="3"] .mavzu-open-btn{
+  background:var(--bg1); border-color:#3a5a48; color:#7fcaa2;
+}
+html[data-theme="1"] .dark-open-btn,html[data-theme="2"] .dark-open-btn,html[data-theme="3"] .dark-open-btn{
+  background:var(--bg1); border-color:#4a4f7d; color:#a7acdb;
+}
+html[data-theme="1"] .quiz-inner,html[data-theme="2"] .quiz-inner,html[data-theme="3"] .quiz-inner,
+html[data-theme="1"] .mavzu-inner,html[data-theme="2"] .mavzu-inner,html[data-theme="3"] .mavzu-inner,
+html[data-theme="1"] .roviy-inner,html[data-theme="2"] .roviy-inner,html[data-theme="3"] .roviy-inner{
+  background:var(--card);
+}
+html[data-theme="1"] .roviy-img-wrap,html[data-theme="2"] .roviy-img-wrap,html[data-theme="3"] .roviy-img-wrap{
+  background:var(--bg1);
+}
+html[data-theme="1"] .roviy-open-btn,html[data-theme="2"] .roviy-open-btn,html[data-theme="3"] .roviy-open-btn{
+  background:var(--bg1); border-color:#3c4a7d; color:#8fa0dd;
+}
+html[data-theme="1"] .nav-strip,html[data-theme="2"] .nav-strip,html[data-theme="3"] .nav-strip{
+  background:color-mix(in srgb, var(--bg1) 90%, transparent);
+}
+html[data-theme="1"] .pn-btn,html[data-theme="2"] .pn-btn,html[data-theme="3"] .pn-btn,
+html[data-theme="1"] .author-box,html[data-theme="2"] .author-box,html[data-theme="3"] .author-box,
+html[data-theme="1"] .resume-chip,html[data-theme="2"] .resume-chip,html[data-theme="3"] .resume-chip,
+html[data-theme="1"] .mavzu-chip,html[data-theme="2"] .mavzu-chip,html[data-theme="3"] .mavzu-chip{
+  background:var(--card);
+}
+html[data-theme="1"] .ar-wrap,html[data-theme="2"] .ar-wrap,html[data-theme="3"] .ar-wrap{
+  background:linear-gradient(150deg, var(--bg1), var(--bg2));
+}
+html[data-theme="1"] .card.muq,html[data-theme="2"] .card.muq,html[data-theme="3"] .card.muq{
+  background:linear-gradient(150deg, var(--bg1), var(--card));
+}
+html[data-theme="1"] .lang-btn.active,html[data-theme="2"] .lang-btn.active,html[data-theme="3"] .lang-btn.active{
+  background:linear-gradient(135deg,var(--rose),var(--rose-d)); color:#1a1420;
+}
+html[data-theme="1"] .q-btn,html[data-theme="2"] .q-btn,html[data-theme="3"] .q-btn{color:#1a1420}
+html[data-theme="1"] .ar-text,html[data-theme="2"] .ar-text,html[data-theme="3"] .ar-text{color:var(--ink)}
+@media(max-width:560px){.dark-btn-wrap{gap:4px}}
 </style>
 </head>
 <body>
@@ -415,6 +554,9 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
     <button class="lang-btn active" id="lb-lat" onclick="setLang('lat')">Oʻzbekcha (Lotin)</button>
     <button class="lang-btn" id="lb-ru" onclick="setLang('ru')">Русский</button>
     <button class="lang-btn quiz-open-btn" onclick="openQuiz()"><span class="v-cyr">📝 Савол-жавоб</span><span class="v-lat">📝 Savol-javob</span><span class="v-ru">📝 Тест</span></button>
+    <button class="lang-btn mavzu-open-btn" onclick="openMavzu()"><span class="v-cyr">🏷️ Мавзулар</span><span class="v-lat">🏷️ Mavzular</span><span class="v-ru">🏷️ Темы</span></button>
+    <button class="lang-btn dark-open-btn" id="darkBtn" onclick="toggleDark()"></button>
+    <button class="lang-btn roviy-open-btn" onclick="openRoviy()"><span class="v-cyr">👥 Ровийлар</span><span class="v-lat">👥 Roviylar</span><span class="v-ru">👥 Передатчики</span></button>
   </div>
 </header>
 
@@ -431,6 +573,11 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
     <input id="jump" type="number" min="1" max="42" placeholder="Raqam (1–42)" oninput="jumpTo(this.value)">
     <span class="ic">✿</span>
   </div>
+</div>
+
+<div id="mavzuChip" class="mavzu-chip" style="display:none" onclick="clearMavzu()">
+  <span>🏷️</span> <span class="v-cyr">Мавзу:</span><span class="v-lat">Mavzu:</span><span class="v-ru">Тема:</span> <b id="mavzuChipTxt"></b>
+  <span class="rc-x">✕</span>
 </div>
 
 <div id="resumeChip" class="resume-chip" style="display:none" onclick="resumeLast()">
@@ -515,7 +662,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h1" data-title="амаллар ниятларга қараб эътибор қилинади amallar niyatlarga qarab eʼtibor qilinadi дела оцениваются по намерениям">
+<article class="card" id="h1" data-mavzu="niyat" data-title="амаллар ниятларга қараб эътибор қилинади amallar niyatlarga qarab eʼtibor qilinadi дела оцениваются по намерениям">
   <button class="card-head" aria-expanded="false" onclick="toggle(1)">
     <span class="num"><span>1</span></span>
     <span class="head-txt">
@@ -597,7 +744,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h2" data-title="ислом, иймон ва эҳсон islom, iymon va ehson ислам, иман и ихсан">
+<article class="card" id="h2" data-mavzu="iymon" data-title="ислом, иймон ва эҳсон islom, iymon va ehson ислам, иман и ихсан">
   <button class="card-head" aria-expanded="false" onclick="toggle(2)">
     <span class="num"><span>2</span></span>
     <span class="head-txt">
@@ -705,7 +852,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h3" data-title="ислом рукнлари ва буюк асослари islom ruknlari va buyuk asoslari столпы ислама и его великие основы">
+<article class="card" id="h3" data-mavzu="iymon" data-title="ислом рукнлари ва буюк асослари islom ruknlari va buyuk asoslari столпы ислама и его великие основы">
   <button class="card-head" aria-expanded="false" onclick="toggle(3)">
     <span class="num"><span>3</span></span>
     <span class="head-txt">
@@ -785,7 +932,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h4" data-title="инсоннинг яралиш босқичлари ва унинг хотимаси insonning yaralish bosqichlari va uning xotimasi этапы сотворения человека и его исход">
+<article class="card" id="h4" data-mavzu="dunyo" data-title="инсоннинг яралиш босқичлари ва унинг хотимаси insonning yaralish bosqichlari va uning xotimasi этапы сотворения человека и его исход">
   <button class="card-head" aria-expanded="false" onclick="toggle(4)">
     <span class="num"><span>4</span></span>
     <span class="head-txt">
@@ -877,7 +1024,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h5" data-title="ёмонлик ва бидъатларни рад этиш yomonlik va bidʼatlarni rad etish отвержение зла и нововведений">
+<article class="card" id="h5" data-mavzu="sunnat" data-title="ёмонлик ва бидъатларни рад этиш yomonlik va bidʼatlarni rad etish отвержение зла и нововведений">
   <button class="card-head" aria-expanded="false" onclick="toggle(5)">
     <span class="num"><span>5</span></span>
     <span class="head-txt">
@@ -965,7 +1112,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h6" data-title="ҳалол ва ҳаром halol va harom дозволенное и запретное">
+<article class="card" id="h6" data-mavzu="halol" data-title="ҳалол ва ҳаром halol va harom дозволенное и запретное">
   <button class="card-head" aria-expanded="false" onclick="toggle(6)">
     <span class="num"><span>6</span></span>
     <span class="head-txt">
@@ -1057,7 +1204,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h7" data-title="дин насиҳатдир din nasihatdir религия — это искреннее отношение">
+<article class="card" id="h7" data-mavzu="sunnat" data-title="дин насиҳатдир din nasihatdir религия — это искреннее отношение">
   <button class="card-head" aria-expanded="false" onclick="toggle(7)">
     <span class="num"><span>7</span></span>
     <span class="head-txt">
@@ -1167,7 +1314,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h8" data-title="мусулмоннинг ҳурмати musulmonning hurmati неприкосновенность мусульманина">
+<article class="card" id="h8" data-mavzu="birodar" data-title="мусулмоннинг ҳурмати musulmonning hurmati неприкосновенность мусульманина">
   <button class="card-head" aria-expanded="false" onclick="toggle(8)">
     <span class="num"><span>8</span></span>
     <span class="head-txt">
@@ -1259,7 +1406,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h9" data-title="енгиллаштирингиз, оғирлаштирмангиз! итоат ва ҳалимлик нажотга бошлайди yengillashtiringiz, ogʻirlashtirmangiz! itoat va halimlik najotga boshlaydi облегчайте, а не усложняйте! повиновение ведёт к спасению">
+<article class="card" id="h9" data-mavzu="sadaqa" data-title="енгиллаштирингиз, оғирлаштирмангиз! итоат ва ҳалимлик нажотга бошлайди yengillashtiringiz, ogʻirlashtirmangiz! itoat va halimlik najotga boshlaydi облегчайте, а не усложняйте! повиновение ведёт к спасению">
   <button class="card-head" aria-expanded="false" onclick="toggle(9)">
     <span class="num"><span>9</span></span>
     <span class="head-txt">
@@ -1483,7 +1630,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h10" data-title="ҳалол-покиза юрган кишининг амали мақбулдир! halol-pokiza yurgan kishining amali maqbuldir! аллах принимает только благое">
+<article class="card" id="h10" data-mavzu="halol" data-title="ҳалол-покиза юрган кишининг амали мақбулдир! halol-pokiza yurgan kishining amali maqbuldir! аллах принимает только благое">
   <button class="card-head" aria-expanded="false" onclick="toggle(10)">
     <span class="num"><span>10</span></span>
     <span class="head-txt">
@@ -1575,7 +1722,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h11" data-title="шубҳали нарсаларни тарк этмоқ shubhali narsalarni tark etmoq оставь сомнительное">
+<article class="card" id="h11" data-mavzu="halol" data-title="шубҳали нарсаларни тарк этмоқ shubhali narsalarni tark etmoq оставь сомнительное">
   <button class="card-head" aria-expanded="false" onclick="toggle(11)">
     <span class="num"><span>11</span></span>
     <span class="head-txt">
@@ -1655,7 +1802,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h12" data-title="фойдали нарсалар билан машғул бўлиш foydali narsalar bilan mashgʻul boʻlish занятость полезными делами">
+<article class="card" id="h12" data-mavzu="axloq" data-title="фойдали нарсалар билан машғул бўлиш foydali narsalar bilan mashgʻul boʻlish занятость полезными делами">
   <button class="card-head" aria-expanded="false" onclick="toggle(12)">
     <span class="num"><span>12</span></span>
     <span class="head-txt">
@@ -1737,7 +1884,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h13" data-title="иймон ва ислом биродарлиги iymon va islom birodarligi братство веры и ислама">
+<article class="card" id="h13" data-mavzu="birodar" data-title="иймон ва ислом биродарлиги iymon va islom birodarligi братство веры и ислама">
   <button class="card-head" aria-expanded="false" onclick="toggle(13)">
     <span class="num"><span>13</span></span>
     <span class="head-txt">
@@ -1836,7 +1983,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h14" data-title="мусулмон кишининг қони тўкилмайди musulmon kishining qoni toʻkilmaydi кровь мусульманина неприкосновенна">
+<article class="card" id="h14" data-mavzu="birodar" data-title="мусулмон кишининг қони тўкилмайди musulmon kishining qoni toʻkilmaydi кровь мусульманина неприкосновенна">
   <button class="card-head" aria-expanded="false" onclick="toggle(14)">
     <span class="num"><span>14</span></span>
     <span class="head-txt">
@@ -1936,7 +2083,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h15" data-title="фақат яхши сўзларни сўзламоқ, меҳмон ва қўшни ҳаққига риоя этмоқ иймондандир faqat yaxshi soʻzlarni soʻzlamoq, mehmon va qoʻshni haqqiga rioya etmoq iymondandir говорить благое, почитать гостя и соседа — от веры">
+<article class="card" id="h15" data-mavzu="axloq" data-title="фақат яхши сўзларни сўзламоқ, меҳмон ва қўшни ҳаққига риоя этмоқ иймондандир faqat yaxshi soʻzlarni soʻzlamoq, mehmon va qoʻshni haqqiga rioya etmoq iymondandir говорить благое, почитать гостя и соседа — от веры">
   <button class="card-head" aria-expanded="false" onclick="toggle(15)">
     <span class="num"><span>15</span></span>
     <span class="head-txt">
@@ -2046,7 +2193,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h16" data-title="ғазаб қилма - жаннатий бўласан! gʻazab qilma - jannatiy boʻlasan! не гневайся — и станешь обитателем рая!">
+<article class="card" id="h16" data-mavzu="axloq" data-title="ғазаб қилма - жаннатий бўласан! gʻazab qilma - jannatiy boʻlasan! не гневайся — и станешь обитателем рая!">
   <button class="card-head" aria-expanded="false" onclick="toggle(16)">
     <span class="num"><span>16</span></span>
     <span class="head-txt">
@@ -2153,7 +2300,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h17" data-title="ҳар бир ишни пухта қилмоқ лозим har bir ishni puxta qilmoq lozim совершенство во всяком деле">
+<article class="card" id="h17" data-mavzu="ibodat" data-title="ҳар бир ишни пухта қилмоқ лозим har bir ishni puxta qilmoq lozim совершенство во всяком деле">
   <button class="card-head" aria-expanded="false" onclick="toggle(17)">
     <span class="num"><span>17</span></span>
     <span class="head-txt">
@@ -2239,7 +2386,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h18" data-title="аллоҳ таолодан қўрқиш ва ҳусни хулқ alloh taolodan qoʻrqish va husni xulq богобоязненность и благой нрав">
+<article class="card" id="h18" data-mavzu="halol" data-title="аллоҳ таолодан қўрқиш ва ҳусни хулқ alloh taolodan qoʻrqish va husni xulq богобоязненность и благой нрав">
   <button class="card-head" aria-expanded="false" onclick="toggle(18)">
     <span class="num"><span>18</span></span>
     <span class="head-txt">
@@ -2375,7 +2522,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h19" data-title="аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати alloh taolo hifzu himoyasi, madadi va nusrati защита, помощь и поддержка аллаха">
+<article class="card" id="h19" data-mavzu="dunyo" data-title="аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати alloh taolo hifzu himoyasi, madadi va nusrati защита, помощь и поддержка аллаха">
   <button class="card-head" aria-expanded="false" onclick="toggle(19)">
     <span class="num"><span>19</span></span>
     <span class="head-txt">
@@ -2559,7 +2706,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h20" data-title="ҳаё иймондандир hayo iymondandir стыдливость — от веры">
+<article class="card" id="h20" data-mavzu="axloq" data-title="ҳаё иймондандир hayo iymondandir стыдливость — от веры">
   <button class="card-head" aria-expanded="false" onclick="toggle(20)">
     <span class="num"><span>20</span></span>
     <span class="head-txt">
@@ -2655,7 +2802,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h21" data-title="ҳақ устида собитқадамлик ва иймон haq ustida sobitqadamlik va iymon стойкость на истине и вера">
+<article class="card" id="h21" data-mavzu="iymon" data-title="ҳақ устида собитқадамлик ва иймон haq ustida sobitqadamlik va iymon стойкость на истине и вера">
   <button class="card-head" aria-expanded="false" onclick="toggle(21)">
     <span class="num"><span>21</span></span>
     <span class="head-txt">
@@ -2741,7 +2888,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h22" data-title="жаннат йўли jannat yoʻli путь в рай">
+<article class="card" id="h22" data-mavzu="ibodat" data-title="жаннат йўли jannat yoʻli путь в рай">
   <button class="card-head" aria-expanded="false" onclick="toggle(22)">
     <span class="num"><span>22</span></span>
     <span class="head-txt">
@@ -2895,7 +3042,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h23" data-title="ҳар бир яхшилик садақадир har bir yaxshilik sadaqadir всякое благое дело — милостыня">
+<article class="card" id="h23" data-mavzu="sadaqa" data-title="ҳар бир яхшилик садақадир har bir yaxshilik sadaqadir всякое благое дело — милостыня">
   <button class="card-head" aria-expanded="false" onclick="toggle(23)">
     <span class="num"><span>23</span></span>
     <span class="head-txt">
@@ -3027,7 +3174,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h24" data-title="аллоҳ зулмни ҳаром қилди alloh zulmni harom qildi аллах запретил несправедливость">
+<article class="card" id="h24" data-mavzu="adolat" data-title="аллоҳ зулмни ҳаром қилди alloh zulmni harom qildi аллах запретил несправедливость">
   <button class="card-head" aria-expanded="false" onclick="toggle(24)">
     <span class="num"><span>24</span></span>
     <span class="head-txt">
@@ -3136,7 +3283,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h25" data-title="аллоҳ таоло фазлу марҳамати alloh taolo fazlu marhamati милость и щедрость аллаха">
+<article class="card" id="h25" data-mavzu="sadaqa" data-title="аллоҳ таоло фазлу марҳамати alloh taolo fazlu marhamati милость и щедрость аллаха">
   <button class="card-head" aria-expanded="false" onclick="toggle(25)">
     <span class="num"><span>25</span></span>
     <span class="head-txt">
@@ -3250,7 +3397,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h26" data-title="ислоҳ ва адолат isloh va adolat примирение и справедливость">
+<article class="card" id="h26" data-mavzu="adolat" data-title="ислоҳ ва адолат isloh va adolat примирение и справедливость">
   <button class="card-head" aria-expanded="false" onclick="toggle(26)">
     <span class="num"><span>26</span></span>
     <span class="head-txt">
@@ -3364,7 +3511,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h27" data-title="яхшилик ва ёмонлик yaxshilik va yomonlik благочестие и грех">
+<article class="card" id="h27" data-mavzu="axloq" data-title="яхшилик ва ёмонлик yaxshilik va yomonlik благочестие и грех">
   <button class="card-head" aria-expanded="false" onclick="toggle(27)">
     <span class="num"><span>27</span></span>
     <span class="head-txt">
@@ -3467,7 +3614,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h28" data-title="суннатларни маҳкам тутинг! бидъатлардан йироқ бўлинг! sunnatlarni mahkam tuting! bidʼatlardan yiroq boʻling! держитесь сунны! сторонитесь нововведений!">
+<article class="card" id="h28" data-mavzu="sunnat" data-title="суннатларни маҳкам тутинг! бидъатлардан йироқ бўлинг! sunnatlarni mahkam tuting! bidʼatlardan yiroq boʻling! держитесь сунны! сторонитесь нововведений!">
   <button class="card-head" aria-expanded="false" onclick="toggle(28)">
     <span class="num"><span>28</span></span>
     <span class="head-txt">
@@ -3563,7 +3710,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h29" data-title="яхшилик эшиклари ва ҳидоят йўллари yaxshilik eshiklari va hidoyat yoʻllari врата блага и пути наставления">
+<article class="card" id="h29" data-mavzu="ibodat" data-title="яхшилик эшиклари ва ҳидоят йўллари yaxshilik eshiklari va hidoyat yoʻllari врата блага и пути наставления">
   <button class="card-head" aria-expanded="false" onclick="toggle(29)">
     <span class="num"><span>29</span></span>
     <span class="head-txt">
@@ -3670,7 +3817,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h30" data-title="аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар alloh taolo belgilab qoʻygan hadlar va harom ishlar границы и запреты, установленные аллахом">
+<article class="card" id="h30" data-mavzu="halol" data-title="аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар alloh taolo belgilab qoʻygan hadlar va harom ishlar границы и запреты, установленные аллахом">
   <button class="card-head" aria-expanded="false" onclick="toggle(30)">
     <span class="num"><span>30</span></span>
     <span class="head-txt">
@@ -3754,7 +3901,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h31" data-title="зоҳидлик моҳияти ва унинг самараси zohidlik mohiyati va uning samarasi суть отрешённости от мира и её плоды">
+<article class="card" id="h31" data-mavzu="dunyo" data-title="зоҳидлик моҳияти ва унинг самараси zohidlik mohiyati va uning samarasi суть отрешённости от мира и её плоды">
   <button class="card-head" aria-expanded="false" onclick="toggle(31)">
     <span class="num"><span>31</span></span>
     <span class="head-txt">
@@ -3880,7 +4027,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h32" data-title="исломда зарар етказиш йўқ islomda zarar yetkazish yoʻq в исламе нет вреда">
+<article class="card" id="h32" data-mavzu="adolat" data-title="исломда зарар етказиш йўқ islomda zarar yetkazish yoʻq в исламе нет вреда">
   <button class="card-head" aria-expanded="false" onclick="toggle(32)">
     <span class="num"><span>32</span></span>
     <span class="head-txt">
@@ -4036,7 +4183,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h33" data-title="исломда қозилик асослари islomda qozilik asoslari основы судопроизводства в исламе">
+<article class="card" id="h33" data-mavzu="adolat" data-title="исломда қозилик асослари islomda qozilik asoslari основы судопроизводства в исламе">
   <button class="card-head" aria-expanded="false" onclick="toggle(33)">
     <span class="num"><span>33</span></span>
     <span class="head-txt">
@@ -4174,7 +4321,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h34" data-title="ёмонликнинг олдини олмоқ - исломий бурч! yomonlikning oldini olmoq - islomiy burch! предотвращение порицаемого — долг мусульманина">
+<article class="card" id="h34" data-mavzu="adolat" data-title="ёмонликнинг олдини олмоқ - исломий бурч! yomonlikning oldini olmoq - islomiy burch! предотвращение порицаемого — долг мусульманина">
   <button class="card-head" aria-expanded="false" onclick="toggle(34)">
     <span class="num"><span>34</span></span>
     <span class="head-txt">
@@ -4353,7 +4500,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h35" data-title="исломий биродарлик ва мусулмоннинг ҳақлари islomiy birodarlik va musulmonning haqlari исламское братство и права мусульманина">
+<article class="card" id="h35" data-mavzu="birodar" data-title="исломий биродарлик ва мусулмоннинг ҳақлари islomiy birodarlik va musulmonning haqlari исламское братство и права мусульманина">
   <button class="card-head" aria-expanded="false" onclick="toggle(35)">
     <span class="num"><span>35</span></span>
     <span class="head-txt">
@@ -4489,7 +4636,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h36" data-title="эзгулик мажмуаси ezgulik majmuasi свод добрых дел">
+<article class="card" id="h36" data-mavzu="axloq" data-title="эзгулик мажмуаси ezgulik majmuasi свод добрых дел">
   <button class="card-head" aria-expanded="false" onclick="toggle(36)">
     <span class="num"><span>36</span></span>
     <span class="head-txt">
@@ -4787,7 +4934,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h37" data-title="аллоҳ таоло адолати, фазли ва қудрати alloh taolo adolati, fazli va qudrati справедливость, милость и могущество аллаха">
+<article class="card" id="h37" data-mavzu="iymon" data-title="аллоҳ таоло адолати, фазли ва қудрати alloh taolo adolati, fazli va qudrati справедливость, милость и могущество аллаха">
   <button class="card-head" aria-expanded="false" onclick="toggle(37)">
     <span class="num"><span>37</span></span>
     <span class="head-txt">
@@ -4879,7 +5026,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h38" data-title="аллоҳ таоло муҳаббатини қозонмоқ alloh taolo muhabbatini qozonmoq как снискать любовь аллаха">
+<article class="card" id="h38" data-mavzu="niyat" data-title="аллоҳ таоло муҳаббатини қозонмоқ alloh taolo muhabbatini qozonmoq как снискать любовь аллаха">
   <button class="card-head" aria-expanded="false" onclick="toggle(38)">
     <span class="num"><span>38</span></span>
     <span class="head-txt">
@@ -4983,7 +5130,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h39" data-title="исломда танглик йўқ islomda tanglik yoʻq в исламе нет затруднения">
+<article class="card" id="h39" data-mavzu="dunyo" data-title="исломда танглик йўқ islomda tanglik yoʻq в исламе нет затруднения">
   <button class="card-head" aria-expanded="false" onclick="toggle(39)">
     <span class="num"><span>39</span></span>
     <span class="head-txt">
@@ -5121,7 +5268,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h40" data-title="фурсатни ғанимат билинг fursatni gʻanimat biling цени время как дар">
+<article class="card" id="h40" data-mavzu="dunyo" data-title="фурсатни ғанимат билинг fursatni gʻanimat biling цени время как дар">
   <button class="card-head" aria-expanded="false" onclick="toggle(40)">
     <span class="num"><span>40</span></span>
     <span class="head-txt">
@@ -5218,7 +5365,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h41" data-title="иймон асоси шариатга эргашишдир iymon asosi shariatga ergashishdir основа веры — следование шариату">
+<article class="card" id="h41" data-mavzu="iymon" data-title="иймон асоси шариатга эргашишдир iymon asosi shariatga ergashishdir основа веры — следование шариату">
   <button class="card-head" aria-expanded="false" onclick="toggle(41)">
     <span class="num"><span>41</span></span>
     <span class="head-txt">
@@ -5344,7 +5491,7 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   </div>
 </article>
 
-<article class="card" id="h42" data-title="аллоҳ азза ва жалланинг мағфирати кенгдир alloh azza va jallaning magʻfirati kengdir прощение аллаха безгранично">
+<article class="card" id="h42" data-mavzu="dunyo" data-title="аллоҳ азза ва жалланинг мағфирати кенгдир alloh azza va jallaning magʻfirati kengdir прощение аллаха безгранично">
   <button class="card-head" aria-expanded="false" onclick="toggle(42)">
     <span class="num"><span>42</span></span>
     <span class="head-txt">
@@ -5565,6 +5712,35 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
     </div>
   </div>
 </div>
+
+<div id="mavzu" class="quiz-screen mavzu-screen" style="display:none">
+  <div class="quiz-inner mavzu-inner">
+    <button class="q-close" onclick="closeMavzu()" title="Yopish">✕</button>
+    <div class="q-head">
+      <div class="q-bismillah">&#65021;</div>
+      <div class="q-title"><span class="v-cyr">Мавзу бўйича қидириш</span><span class="v-lat">Mavzu bo'yicha qidirish</span><span class="v-ru">Поиск по темам</span></div>
+      <div class="q-lead"><span class="v-cyr">Кераклиси мавзуни танланг — фақат шу мавзудаги ҳадислар кўрсатилади</span><span class="v-lat">Kerakli mavzuni tanlang — faqat shu mavzudagi hadislar ko'rsatiladi</span><span class="v-ru">Выберите тему — будут показаны только относящиеся к ней хадисы</span></div>
+    </div>
+    <div class="mavzu-grid" id="mavzuGrid"></div>
+  </div>
+</div>
+
+<div id="roviyModal" class="quiz-screen roviy-screen" style="display:none">
+  <div class="quiz-inner roviy-inner">
+    <button class="q-close" onclick="closeRoviy()" title="Yopish">✕</button>
+    <div class="q-head">
+      <div class="q-bismillah">&#65021;</div>
+      <div class="q-title"><span class="v-cyr">Ровийлар — қайси саҳобадан неча ҳадис ривоят бўлган?</span><span class="v-lat">Roviylar — qaysi sahobadan necha hadis rivoyat bo'lgan?</span><span class="v-ru">Передатчики — сколько хадисов от каждого сподвижника</span></div>
+    </div>
+    <div class="roviy-img-wrap" id="roviyImgWrap">
+      <div class="roviy-loading" id="roviyLoading"><span class="v-cyr">Юкланмоқда...</span><span class="v-lat">Yuklanmoqda...</span><span class="v-ru">Загрузка...</span></div>
+    </div>
+    <a class="q-btn q-btn-light roviy-dl" id="roviyDownload" href="roviylar.webp" download="Roviylar-Arbain-Nawawiy.webp">
+      <span class="v-cyr">⬇ Расмни юклаб олиш</span><span class="v-lat">⬇ Rasmni yuklab olish</span><span class="v-ru">⬇ Скачать изображение</span>
+    </a>
+  </div>
+</div>
+
 <script id="quizData" type="application/json">{"1": [{"q": "1-ҳадисни ким ривоят қилган?", "o": ["Абу Саид ал-Худрий разияллоҳу анҳу", "Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Умар ибн Хаттоб разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо"], "a": 2}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Термизий ривоятлари", "Аҳмад ва Доримий ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 3}, {"q": "1-ҳадиснинг мавзуси қайси?", "o": ["Дин насиҳатдир", "Ислом рукнлари ва буюк асослари", "Амаллар ниятларга қараб эътибор қилинади", "Инсоннинг яралиш босқичлари ва унинг хотимаси"], "a": 2}, {"q": "Умар ибн Хаттоб разияллоҳу анҳу қандай лақаб билан машҳур?", "o": ["«Форуқ» — ҳақ билан ботилни ажратувчи", "«Асадуллоҳ» — Аллоҳнинг арслони", "«Зуннурайн» — икки нур соҳиби", "«Сиддиқ» — ростгўй"], "a": 0}, {"q": "«Амаллар ниятларга қараб эътибор қилинади» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["16", "39", "1", "30"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["“Бас, баслашувчи кишилар мана шу йўлда баслашсинлар!”", "Ҳаёнинг зидди", "Барча амаллар учун ният шартдир", "Ҳаромдан ҳазар қилмоқ"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Расулуллоҳ соллаллоҳу алайҳи ва саллам мўъжизалари", "Матлуб иймон", "\"Сизларни нимадан қайтарган бўлсам, ундан йироқ бўлинглар\"", "Ниятнинг вақти ва ўрни"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Дуо одобларидан", "Ҳижратнинг вожиблиги", "Дуони ижобат қилгувчи Зотга қилинади", "Мақбул амаллар"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Амирулмўминин Абу Ҳафс Умар ибн Хаттоб разияллоҳу анҳудан ривоят: Мен Расулуллоҳ соллаллоҳу алайҳи ва салламнинг шундай деяётганларини эшитдим: …»", "o": ["\"Амаллар фақатгина ниятлар билан эътиборлидир ва ҳар бир киши учун унинг ният қилган…", "қилмаган ҳолда рўбарў бўлсанг, Мен сени ер юзини қоплайдиган мағфират билан қарши…", "амални қилса, у албатта рад этилур\".", "орасида аввалги Пайғамбарлардан сақланиб қолган бир гап шуки: агар уялмасанг, хоҳлаган…"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бас, кимнинг ҳижрати Аллоҳ ва Расули учун бўлса, унинг …»", "o": ["Расулуллоҳ соллаллоҳу алайҳи ва саллам бизга мавъиза қилдилар.", "салламнинг бундай деганларини эшитдим: \"Сизларни нимадан қайтарган бўлсам, ундан йироқ…", "даъволарига асосланиб сўраган нарсалари берилаверса, кимсалар қавмнинг молию қонини даъво…", "ҳижрати Аллоҳ ва Расули учун деб эътибор қилинажак."], "a": 3}], "2": [{"q": "2-ҳадисни ким ривоят қилган?", "o": ["Анас ибн Молик разияллоҳу анҳу", "Оиша разияллоҳу анҳо", "Абу Зарр Ғифорий разияллоҳу анҳу", "Умар ибн Хаттоб разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Аҳмад ва Доримий ривоятлари", "Термизий ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "2-ҳадиснинг мавзуси қайси?", "o": ["Ҳалол ва ҳаром", "Ислом, иймон ва эҳсон", "Аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати", "Фақат яхши сўзларни сўзламоқ, меҳмон ва қўшни ҳаққига риоя этмоқ иймондандир"], "a": 1}, {"q": "Умар ибн Хаттоб разияллоҳу анҳу қандай лақаб билан машҳур?", "o": ["«Форуқ» — ҳақ билан ботилни ажратувчи", "«Зуннурайн» — икки нур соҳиби", "«Асадуллоҳ» — Аллоҳнинг арслони", "«Сиддиқ» — ростгўй"], "a": 0}, {"q": "«Ислом, иймон ва эҳсон» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["2", "37", "42", "19"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Кийим ва ташқи кўринишни гўзал қилиб юриш", "Амаллар хотимасига қараб белгиланади", "Шубҳалардан йироқ бўлиш ҳақида салафлардан қилинган нақллар", "Юқоридаги ҳадис Исломнинг улкан асослари каторига қўшилади. Зеро, у ҳар бир ишни шариат буюрганидек чиройли ва мукаммал адо этишга чақиради"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Дунё Охират учун кўприкдир", "Бу ҳадис ҳаром ишларга олиб борадиган баҳоналарнинг олдини олишга ундайди", "Ислом нима?", "Ғазабнинг ҳалокатли оқибатлари"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бидъатлардан ҳазир бўлинг!", "Соғлом муҳит яратиш", "Иймон нима?", "Даъвогарнинг ҳужжати — далил-исбот, инкор қилувчининг ҳужжати — қасам"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Тиззасини у кишининг тиззаларига тақаб, икки қўлини …»", "o": ["сонларига қўйиб, деди: - Эй Муҳаммад!", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "одамлар билиб қолишини истамайдиган ишингдир”."], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «- Аллоҳга, Унинг фаришталарига, китобларига, пайғамбарларига ва Охират …»", "o": ["ҳеч бирингиз - токи унинг хоҳиш-истаклари мен олиб келган нарсага бўйсунмагунча, - мўмин…", "Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!", "кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг.", "тўғри йўлдаги халифалар суннатига эргашингиз!"], "a": 2}], "3": [{"q": "3-ҳадисни ким ривоят қилган?", "o": ["Наввос ибн Самъон разияллоҳу анҳу", "Абу Молик ал-Ашъарий разияллоҳу анҳу", "Оиша разияллоҳу анҳо", "Абдуллоҳ ибн Умар разияллоҳу анҳумо"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Бухорий ва Муслим ривоятлари", "Байҳақий ривоятлари", "Аҳмад ва Доримий ривоятлари"], "a": 1}, {"q": "3-ҳадиснинг мавзуси қайси?", "o": ["Ислоҳ ва адолат", "Ислом рукнлари ва буюк асослари", "Зоҳидлик моҳияти ва унинг самараси", "Фурсатни ғанимат билинг"], "a": 1}, {"q": "Абдуллоҳ ибн Умар разияллоҳу анҳумо нечта ҳадис ривоят қилган?", "o": ["539 та", "5374 та", "1660 та", "2630 та"], "a": 3}, {"q": "«Ислом рукнлари ва буюк асослари» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["9", "23", "3", "20"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["“Эй Аллоҳнинг қуллари, ўзаро биродар бўлингиз!”", "Исломнинг мустаҳкам пойдеворлар устига қурилган бинога ўхшатилиши ва диннинг барқарорлиги ушбу пойдеворларнинг пухталигига боғлиқ", "Аллоҳ таолонинг шокир бандалари У Зот марҳамати ва нусратига муносибдирлар", "Ниятнинг вақти ва ўрни"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмонлар бир тана аъзоларидир", "Аллоҳнинг марҳамати кенг", "Ислом арконларининг бир-бирига боғлиқлиги", "Саҳобаи киромлар ҳамиша динларини яхшироқ ўрганиш ва иймонларини саломат сақлашга ташна бўлишган"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Улуғ фазл", "Инсон нафсини тарбиялаб бормоғи, уни тубан одатлардан нафратланишга ўргатмоғи керак. Ҳақиқий иймон эгалари беҳуда нарсаларга асло эътибор бермайдилар", "Аллоҳ таоло валийларига душманлик қилиш", "Ибодатларни қилишдан мақсад"], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Енгиллатилаётган ҳукм қийинчилик сабабли буткул тарк қилинмайди", "Ҳадисда иймон шохобчаларининг айримлари санаб ўтилган", "Ҳақ сўзни айтишдан чўчиманг!", "Ислом билан иймон ўртасидаги фарқ"], "a": 1}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:", "Ҳалол ҳам, ҳаром ҳам аниқ. Аммо у иккисининг ўртасида шубҳали нарсалар бор", "Қасамдаги хато ва унутиш", "Ислом ақида ва амалдан иборат яхлит нарсадир"], "a": 3}], "4": [{"q": "4-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Ирбоз ибн Сория разияллоҳу анҳу", "Оиша разияллоҳу анҳо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Дорақутний ривоятлари", "Бухорий ва Муслим ривоятлари", "Абу Довуд ва Термизий ривоятлари"], "a": 2}, {"q": "4-ҳадиснинг мавзуси қайси?", "o": ["Инсоннинг яралиш босқичлари ва унинг хотимаси", "Ҳақ устида собитқадамлик ва иймон", "Яхшилик ва ёмонлик", "Аллоҳ таоло фазлу марҳамати"], "a": 0}, {"q": "Абдуллоҳ ибн Масъуд разияллоҳу анҳу қайси фиқҳ мактабига асос солган?", "o": ["Мадина фиқҳ мактабига", "Басра фиқҳ мактабига", "Шом фиқҳ мактабига", "Куфа фиқҳ мактабига"], "a": 3}, {"q": "«Инсоннинг яралиш босқичлари ва унинг хотимаси» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["2", "4", "23", "6"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳар қандай подшонинг ўз қўрғони бор, Аллоҳнинг ердаги қўрғони У ҳаром қилган нарсаларидир", "Аллоҳнинг китобига насиҳат", "Она қорнида боланинг ривожланиш босқичлари", "Ким бир солиҳ амални ният қилган бўлса, бироқ хасталик, ўлим ёки шунга ўхшаш сабаблар туфайли уни бажаролмай қолса, унинг учун ажр олаверади"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Жон (руҳ) пуфланиши", "Аллоҳнинг китобига насиҳат", "Аллоҳ ва Расулига итоат қилишнинг нодир намуналари", "Зулм бандалар учун ҳам ҳаромдир"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Маъсиятлардан четланмоқ ҳам фарзларни адо этиш жумласидандир", "Ғазабнинг ҳалокатли оқибатлари", "Болани олдириб ташлаш ҳаромдир", "Шубҳали нарсаларни тарк этмоқ лозим"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Сўнг фариштага шу инсоннинг тақдирига тааллуқли бўлган тўрт нарсани - ризқи, …»", "o": ["иймон келтирдим, деб айтгин-да, сўнгра тўғри йўлда юр!", "ҳузурида ўн ҳасанадан етти юз баробаргача – беҳад зиёдалар билан ёзиб қўяди.", "салламнинг бундай деганларини эшитдим: \"Сизларни нимадан қайтарган бўлсам, ундан йироқ…", "ажали, амали ҳамда бахтсиз ёки бахтли эканини ёзиш фармон қилинади."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Ундан ўзга ҳеч қандай илоҳ йўқ бўлган Аллоҳга қасамки, сизлардан бирингиз жаннат аҳлининг …»", "o": ["Набий соллаллоҳу алайҳи ва салламнинг орқаларидан уловларига мингашиб кетардим.", "амалларини қилиб юради, ҳатто у билан жаннат ўртасида бир газгина масофа қолади.", "Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Покизалик иймоннинг ярмидир.", "иймон келтирдим, деб айтгин-да, сўнгра тўғри йўлда юр!"], "a": 1}], "5": [{"q": "5-ҳадисни ким ривоят қилган?", "o": ["Нўъмон ибн Башир разияллоҳу анҳумо", "Абу Саид ал-Худрий разияллоҳу анҳу", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо", "Оиша разияллоҳу анҳо"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Байҳақий ривоятлари", "Дорақутний ривоятлари", "Бухорий ривоятлари"], "a": 0}, {"q": "5-ҳадиснинг мавзуси қайси?", "o": ["Иймон ва Ислом биродарлиги", "Ёмонлик ва бидъатларни рад этиш", "Ҳалол-покиза юрган кишининг амали мақбулдир!", "Яхшилик эшиклари ва ҳидоят йўллари"], "a": 1}, {"q": "Оиша разияллоҳу анҳо кимнинг қизлари?", "o": ["Усмон ибн Аффоннинг", "Абу Суфённинг", "Умар ибн Хаттобнинг", "Абу Бакр Сиддиқнинг"], "a": 3}, {"q": "«Ёмонлик ва бидъатларни рад этиш» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["4", "36", "1", "5"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳасад қилманглар а) Ҳасаднинг луғавий ва шаръий таърифи:", "Ислом дини фақат бўйсуниш ва эргашишдир, унда янгича нарсаларни пайдо қилиш мумкин эмас", "Амри маъруф ва наҳий мункарга қулоқ солмайдиган кимсага ҳам насиҳат қилинаверади", "Ислом динининг боши, устуни ва унинг олий нуқтаси"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Рад этиладиган амаллар", "Энг гўзал ахлоқ", "Покиза ва фозил жамият иймон самарасидир", "Ниятнинг вақти ва ўрни"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тўғрилик фойдаси", "Кўп савол бериш ва чуқур кетишдан қайтарилган", "Мақбул амаллар", "Янглишмоқ ва унутмоқ ҳукмининг тафсилоти"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Уммулмўминин Оиша разияллоҳу анҳодан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: \"Кимки …»", "o": ["кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг.", "келтирган бўлса, қўшнисини иззат-икром қилсин.", "кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\".", "динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\"."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Имом Муслимнинг ривоятида: \"Кимки биз унга буюрмаган …»", "o": ["баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "тўғри йўлдаги халифалар суннатига эргашингиз!", "амални қилса, у албатта рад этилур\".", "кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг."], "a": 2}], "6": [{"q": "6-ҳадисни ким ривоят қилган?", "o": ["Абу Ҳурайра разияллоҳу анҳу", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Абу Довуд ва Термизий ривоятлари", "Бухорий ва Муслим ривоятлари", "Муслим ривоятлари", "Байҳақий ривоятлари"], "a": 1}, {"q": "6-ҳадиснинг мавзуси қайси?", "o": ["Суннатларни маҳкам тутинг! Бидъатлардан йироқ бўлинг!", "Ҳалол ва ҳаром", "Иймон асоси шариатга эргашишдир", "Дин насиҳатдир"], "a": 1}, {"q": "Нўъмон ибн Башир разияллоҳу анҳумонинг алоҳида хусусияти нима?", "o": ["Яманга қози қилиб юборилган", "Энг кўп ҳадис ривоят қилган саҳобий", "Ҳижратдан кейин ансорлардан Мадинада туғилган биринчи фарзанд", "Расулуллоҳнинг набиралари"], "a": 2}, {"q": "«Ҳалол ва ҳаром» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["10", "6", "27", "21"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Амал ва ибодатларни ихлос билан бажармоқ", "Даъвогарнинг ҳужжати — далил-исбот, инкор қилувчининг ҳужжати — қасам", "Мураббий пайғамбар", "Ҳалол ҳам, ҳаром ҳам аниқ. Аммо у иккисининг ўртасида шубҳали нарсалар бор"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Қийин аҳволда қолган кишига ёрдам бермоқ", "Шубҳали нарсаларни тарк этиб, фақат ҳалол-покиза амалларга берилиш хусусида салафларнинг сўзлари ва ишларидан", "Иштибоҳли нарсалар ҳам ўз навбатида бир неча хил бўлади", "Ҳадис маънолари"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Шубҳалардан йироқ бўлиш ҳақида салафлардан қилинган нақллар", "Ҳақни таниш туғма хислатдир", "Тилнинг тўғрилиги", "Мусулмон жамиятнинг бирдамлиги ва ундаги ўзаро тинч- тотувлик"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Абдуллоҳ Нўъмон ибн Башир разияллоҳу анҳудан ривоят: \"Мен Расулуллоҳ соллаллоҳу алайҳи ва …»", "o": ["- сукут қилди, бас, улар устида баҳс қилмангиз.", "у Аллоҳ таоло осон қилган кишига осондир: Аллоҳга бирон-бир нарсани шерик этмасдан ибодат…", "ҳузурида ўн ҳасанадан етти юз баробаргача – беҳад зиёдалар билан ёзиб қўяди.", "саллам шундай деганларини эшитдим: \"Дарҳақиқат, ҳалол нарсалар аниқдир, ҳаром нарсалар…"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Иккисининг ўртасида эса, шубҳали бўлган нарсалар …»", "o": ["соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "ҳам борки, кўпчилик уларни билмайди.", "динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\".", "қилмаган ҳолда рўбарў бўлсанг, Мен сени ер юзини қоплайдиган мағфират билан қарши…"], "a": 1}], "7": [{"q": "7-ҳадисни ким ривоят қилган?", "o": ["Нўъмон ибн Башир разияллоҳу анҳумо", "Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Оиша разияллоҳу анҳо", "Ирбоз ибн Сория разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Аҳмад ва Доримий ривоятлари", "Дорақутний ривоятлари", "Бухорий ривоятлари"], "a": 0}, {"q": "7-ҳадиснинг мавзуси қайси?", "o": ["Инсоннинг яралиш босқичлари ва унинг хотимаси", "Дин насиҳатдир", "Аллоҳ таолодан қўрқиш ва ҳусни хулқ", "Ҳалол ва ҳаром"], "a": 1}, {"q": "Тамим ад-Дорий разияллоҳу анҳу Исломдан олдин ким бўлган?", "o": ["Шоир", "Табиб", "Савдогар", "Насроний роҳиб"], "a": 3}, {"q": "«Дин насиҳатдир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["7", "42", "18", "12"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Қасамдаги хато ва унутиш", "Ўтган умматлар ҳалокати сабаблари", "Амал ва ибодатларни ихлос билан бажармоқ", "Аллоҳга насиҳат"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ислом ақида ва амалдан иборат яхлит нарсадир", "Аллоҳнинг китобига насиҳат", "Ҳақни таниш туғма хислатдир", "\"Аллоҳ таоло мўминнинг жонини олишда тараддудланади\""], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бир жонни қасдан ўлдириш;", "Барча садақалар холис Аллоҳ учун қилинмоғи шарт", "Болани олдириб ташлаш ҳаромдир", "Расулуллоҳ соллаллоҳу алайҳи ва салламга насиҳат"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Тамим ибн Авс Дорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу …»", "o": ["соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "ҳаром ва ўзи ҳаром билан озиқланган.", "Аллоҳ ҳам, одамлар ҳам мени яхши кўрсин.", "алайҳи ва саллам дедилар: - Дин бу насиҳатдир."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «- Аллоҳ учун, Унинг китоби учун, Расули …»", "o": ["ҳам борки, кўпчилик уларни билмайди.", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…", "учун ҳамда мусулмонларнинг раҳбарлари ва оммалари учун!", "у Аллоҳ таоло осон қилган кишига осондир: Аллоҳга бирон-бир нарсани шерик этмасдан ибодат…"], "a": 2}], "8": [{"q": "8-ҳадисни ким ривоят қилган?", "o": ["Абу Ҳурайра разияллоҳу анҳу", "Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Умар ибн Хаттоб разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ривоятлари", "Аҳмад ва Доримий ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 3}, {"q": "8-ҳадиснинг мавзуси қайси?", "o": ["Мусулмоннинг ҳурмати", "Ғазаб қилма - жаннатий бўласан!", "Исломда зарар етказиш йўқ", "Мусулмон кишининг қони тўкилмайди"], "a": 0}, {"q": "Абдуллоҳ ибн Умар разияллоҳу анҳумо нечта ҳадис ривоят қилган?", "o": ["539 та", "1660 та", "2630 та", "5374 та"], "a": 2}, {"q": "«Мусулмоннинг ҳурмати» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["23", "14", "8", "27"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳадис яна қуйидагиларга ундайди:", "Муоз разияллоҳу анҳу солиҳ амалларга қаттиқ эътибор берганлар", "Икки шаҳодатни тил билан айтган кишининг жони ҳам, моли ҳам омонда бўлади", "Аллоҳ таоло бандаларига енгиллик берур"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Дуони ижобат қилгувчи Зотга қилинади", "Ҳавои хоҳиш моҳияти ва унинг турлари", "Абу Бакр разияллоҳу анҳу билан Умар разияллоҳу анҳу ўрталарида кечган мунозара", "Тошбўрон"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ азза ва жалланинг фазли кенгдир", "Исломнинг барча арконларини тарк этган кишининг ҳукми", "Мағфират тиламоқ", "Китобу Суннатда дунёнинг қораланиши унинг замони ёхуд маконига тегишли эмас"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Ибн Умар разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: \"Инсонлар \"Аллоҳдан ўзга илоҳ йўқ ва Муҳаммад …»", "o": ["ҳеч бирингиз - токи унинг хоҳиш-истаклари мен олиб келган нарсага бўйсунмагунча, - мўмин…", "Унинг Расулидир\" деб гувоҳлик бериб, намозни адо этмагунларича ва закотни бермагунларича,…", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бизга мавъиза қилдилар.", "орасида аввалги Пайғамбарлардан сақланиб қолган бир гап шуки: агар уялмасанг, хоҳлаган…"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Агар одамлар юқоридагиларга амал қилсалар, мендан …»", "o": ["қонлари ва молларини омон сақлаган бўладилар.", "Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Покизалик иймоннинг ярмидир.", "\"Амаллар фақатгина ниятлар билан эътиборлидир ва ҳар бир киши учун унинг ният қилган…", "даъволарига асосланиб сўраган нарсалари берилаверса, кимсалар қавмнинг молию қонини даъво…"], "a": 0}], "9": [{"q": "9-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Абу Ҳурайра разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Дорақутний ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Термизий ривоятлари"], "a": 0}, {"q": "9-ҳадиснинг мавзуси қайси?", "o": ["Енгиллаштирингиз, оғирлаштирмангиз! Итоат ва ҳалимлик нажотга бошлайди", "Аллоҳ таоло адолати, фазли ва қудрати", "Ҳалол-покиза юрган кишининг амали мақбулдир!", "Ҳаё иймондандир"], "a": 0}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["5374 та", "2286 та", "1170 та", "2630 та"], "a": 0}, {"q": "«Енгиллаштирингиз, оғирлаштирмангиз! Итоат ва ҳалимлик нажотга бошлайди» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["1", "9", "27", "37"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["\"Сизларни нимадан қайтарган бўлсам, ундан йироқ бўлинглар\"", "Тавба ва истиғфор", "Инсонни зоҳид қилувчи сабаблар", "Мусулмон ҳамиша комилликка интилади"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳадисда зарар етказмоқ инкор этилган. Унинг шаръий жазо ва қасосга дахли йўқ", "Зарурат туғилганда ҳаром амалларни қилишга ҳам рухсат этилиши", "Ғазабни даф этиш ва даволаш йўллари", "Аллоҳ таоло соясида"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳнинг китобига насиҳат", "Мусулмоннинг айбини беркитмоқ", "Буйруқларга бўйсуниш", "Тилнинг тўғрилиги"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра Абдурраҳмон ибн Сахр разияллоҳу анҳудан ривоят: Мен Расулуллоҳ соллаллоҳу алайҳи ва …»", "o": ["дедилар: \"Аллоҳ покдир ва фақат пок нарсанигина қабул қилади.", "соллаллоҳу алайҳи ва салламга: “Менга насиҳат қилинг”, деди.", "салламнинг бундай деганларини эшитдим: \"Сизларни нимадан қайтарган бўлсам, ундан йироқ…", "Аллоҳ ҳам, одамлар ҳам мени яхши кўрсин."], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Сизлардан аввал ўтган қавмларни халок қилган нарса уларнинг ўз пайғамбарларига …»", "o": ["баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "ҳаром ва ўзи ҳаром билан озиқланган.", "сонларига қўйиб, деди: - Эй Муҳаммад!", "кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\"."], "a": 3}], "10": [{"q": "10-ҳадисни ким ривоят қилган?", "o": ["Абу Ҳурайра разияллоҳу анҳу", "Абу Саълаба ал-Хушаний разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу", "Ҳасан ибн Али разияллоҳу анҳумо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ривоятлари", "Ибн Можа ривоятлари", "Аҳмад ва Доримий ривоятлари", "Муслим ривоятлари"], "a": 3}, {"q": "10-ҳадиснинг мавзуси қайси?", "o": ["Ғазаб қилма - жаннатий бўласан!", "Иймон ва Ислом биродарлиги", "Ҳалол-покиза юрган кишининг амали мақбулдир!", "Исломий биродарлик ва мусулмоннинг ҳақлари"], "a": 2}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["1170 та", "2286 та", "2630 та", "5374 та"], "a": 3}, {"q": "«Ҳалол-покиза юрган кишининг амали мақбулдир!» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["10", "37", "31", "35"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таоло ҳузурида фақат ҳалол-покиза нарсаларгина мақбулдир", "Динда ҳараж-танглик йўқ", "Ҳадиснинг умумий маъноси", "Комил иймон"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Расулуллоҳ соллаллоҳу алайҳи ва саллам уммат тарбиясига қаттиқ эътибор берганлар", "Амал қандай қилиб мақбул-покиза бўлади?", "Ота-она ва мураббийлар вазифаси", "Ҳасаналарни ният қилмоқ"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бу ҳадис мўмин кишини ҳалолга, ҳаромдан узоқлашишга, шубҳали нарсаларни тарк қилишга, дини ва обрўсини пок сақлашга, одамларда ёмон гумон уйғотиши мумкин бўлган амаллардан ўзини", "Ҳаёнинг зидди", "\"Қабул қилмайди\" дегани нимани англатади?", "Расулуллоҳ соллаллоҳу алайҳи ва саллам ва асҳоби киромлар зуҳди"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам …»", "o": ["анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Қаерда бўлсанг ҳам,…", "ва саллам дедилар: “Аллоҳ таоло ҳар бир ишда яхшиликни ёзгандир.", "ҳеч бирингиз - токи унинг хоҳиш-истаклари мен олиб келган нарсага бўйсунмагунча, - мўмин…", "дедилар: \"Аллоҳ покдир ва фақат пок нарсанигина қабул қилади."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бироқ унинг егани ҳаром, ичгани ҳаром, кийгани …»", "o": ["саллам дедилар: “ зарар бермоқ ҳам, зарар етказмоқ ҳам йўқдир!” .", "ҳаром ва ўзи ҳаром билан озиқланган.", "орасида аввалги Пайғамбарлардан сақланиб қолган бир гап шуки: агар уялмасанг, хоҳлаган…", "салламнинг бундай деганларини эшитдим: \"Сизларни нимадан қайтарган бўлсам, ундан йироқ…"], "a": 1}], "11": [{"q": "11-ҳадисни ким ривоят қилган?", "o": ["Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Ҳасан ибн Али разияллоҳу анҳумо", "Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Термизий ривоятлари", "Байҳақий ривоятлари", "Дорақутний ривоятлари"], "a": 1}, {"q": "11-ҳадиснинг мавзуси қайси?", "o": ["Исломда зарар етказиш йўқ", "Ислоҳ ва адолат", "Аллоҳ таоло муҳаббатини қозонмоқ", "Шубҳали нарсаларни тарк этмоқ"], "a": 3}, {"q": "Ҳасан ибн Али разияллоҳу анҳумога Расулуллоҳ соллаллоҳу алайҳи ва саллам қандай лақаб берганлар?", "o": ["«Амин»", "«Райҳоним» — хушбўй гулим", "«Форуқ»", "«Сайфуллоҳ»"], "a": 1}, {"q": "«Шубҳали нарсаларни тарк этмоқ» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["16", "11", "33", "19"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ азза ва жаллага муҳтожлик", "Шубҳали нарсаларни тарк этмоқ лозим", "Ислом рукнларини адо этмоқ", "Саҳобаи киромлар фазилати. Улар қалбининг мусаффолиги"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Савол-жавоб тарбия услубларидан биридир", "Аллоҳ таолонинг дўстлари", "Итоатга чақириш", "Шубҳали нарсаларни тарк этиб, фақат ҳалол-покиза амалларга берилиш хусусида салафларнинг сўзлари ва ишларидан"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Қасос", "Даъвогарнинг ҳужжати жавобгарнинг ҳужжатидан муқаддам туради", "Мусулмон киши ҳаромдан қандай қутулади?", "Аниқ билан шак-шубҳа қарама-қарши келиб қолса, қай бири олинади?"], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Шариат аҳкомларига тўлиқ бўйсунган киши шубҳали нарсалардан ўзини сақласин", "Агар икки киши сўкишса ёки бир-бирларига туҳмат ёғдирса, ўртада қасос бўлмайди. Ҳар бири ўз гуноҳига яраша жавоб беради. Аммо уларнинг бирида иккинчисининг ҳақи бор бўлса, уни ҳоким ҳал қилиб", "Ҳадиси қудсий таърифи", "Ғазаб заифлик, ҳалимлик эса қувват белгисидир"], "a": 0}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ҳаромдан ҳазар қилмоқ", "Аллоҳни ёд этгин, Аллоҳ ҳам сени асрайди", "Ота-она ва мураббийлар вазифаси", "Ростгўйлик хотиржамликдир, ёлғончилик эса саросимадир"], "a": 3}], "12": [{"q": "12-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Аббос разияллоҳу анҳумо", "Абу Ҳурайра разияллоҳу анҳу", "Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Ирбоз ибн Сория разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Дорақутний ривоятлари", "Байҳақий ривоятлари", "Термизий ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 2}, {"q": "12-ҳадиснинг мавзуси қайси?", "o": ["Ҳалол-покиза юрган кишининг амали мақбулдир!", "Фойдали нарсалар билан машғул бўлиш", "Ҳар бир ишни пухта қилмоқ лозим", "Иймон асоси шариатга эргашишдир"], "a": 1}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["5374 та", "1170 та", "2286 та", "2630 та"], "a": 0}, {"q": "«Фойдали нарсалар билан машғул бўлиш» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["11", "25", "40", "12"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Соғлом муҳит яратиш", "Охиратда ҳисоб-китоб қилмоқ Аллоҳ азза ва жаллага ҳаволадир", "Савол-жавоб тарбия услубларидан биридир", "Мўминнинг вазифаси иложи борича хайрли амалларни кўпайтирмоқдир. Доим Аллоҳ таоло азобидан қўрқиб, хавфсираб туриши эса уни янада кўпроқ амалга чорлайди. Унинг ҳақиқий мусофирга ўхшаши"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Қўшнига озор бериш Исломда ҳаромдир", "Қалб салоҳияти", "Беҳуда нарсалар билан машғул бўлиш умрни зое кетказиш ва иймон заифлиги аломатидир", "Бидъатлардан ҳазир бўлинг!"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мураббий пайғамбар", "Машаққат енгиллик сари бошлайди", "Аллоҳ таоло бандасига сўраганидан ҳам хайрлироқ неъматни беради", "Беҳуда нарсалардан юз ўгирмоқ саломатлик ва нажот йўлидир"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Кишининг …»", "o": ["ажали, амали ҳамда бахтсиз ёки бахтли эканини ёзиш фармон қилинади.", "- сукут қилди, бас, улар устида баҳс қилмангиз.", "ўзи учун муҳим бўлмаган нарсаларни тарк қилиши унинг Исломи чиройли эканлигидандир”.", "Набий соллаллоҳу алайҳи ва салламнинг орқаларидан уловларига мингашиб кетардим."], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Аллоҳ таоло билан машғул қалб ўзи учун кераксиз бўлган ишларга эътибор бермайди", "Бировга зарар бериш мақсадида молнинг баҳосини ошириш ножоизлиги", "Инсонни зоҳид қилувчи сабаблар", "Ҳадислардаги \"Фақат унинг ҳаққи бундан мустасно\" лафзининг маъноси"], "a": 0}], "13": [{"q": "13-ҳадисни ким ривоят қилган?", "o": ["Анас ибн Молик разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо", "Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Аҳмад ва Доримий ривоятлари", "Бухорий ва Муслим ривоятлари", "Дорақутний ривоятлари", "Ибн Можа ривоятлари"], "a": 1}, {"q": "13-ҳадиснинг мавзуси қайси?", "o": ["Иймон ва Ислом биродарлиги", "Аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Ҳалол ва ҳаром"], "a": 0}, {"q": "Анас ибн Молик разияллоҳу анҳу Расулуллоҳ соллаллоҳу алайҳи ва салламга неча йил хизмат қилган?", "o": ["Уч йил", "Беш йил", "Ўн йил", "Йигирма йил"], "a": 2}, {"q": "«Иймон ва Ислом биродарлиги» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["13", "12", "33", "22"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Улуғ ҳикмат. Яхшилик эшиклари кенг очиқ", "Мусулмон жамиятнинг бирдамлиги ва ундаги ўзаро тинч- тотувлик", "Мағфират сабаблари", "Тўғри йўлда юриш нима дегани?"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Комил иймон", "Аллоҳнинг китобига насиҳат", "Фақат хайрли сўзларни сўзлаб, беҳуда гаплардан ўзини тиймоқ иймон комиллигидандир", "Мусулмоннинг айбини беркитмоқ"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмондаги олийҳимматлик ва инсонийлик", "Бировга зарар бериш мақсадида молнинг баҳосини ошириш ножоизлиги", "Китобу Суннатдан мисоллар", "Боқий насиҳат"], "a": 0}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Насиҳат турларидан бири", "Динда ҳараж-танглик йўқ", "Хайрли амалларда биродарлар билан мусобақалашмоқ иймон камолидандир", "Иймон нима?"], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Покиза ва фозил жамият иймон самарасидир", "Мусулмон ҳамиша комилликка интилади", "Тақво нажот йўлидир", "Сеҳр қилиш;"], "a": 0}], "14": [{"q": "14-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Ирбоз ибн Сория разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Байҳақий ривоятлари", "Термизий ривоятлари", "Бухорий ва Муслим ривоятлари", "Абу Довуд ва Термизий ривоятлари"], "a": 2}, {"q": "14-ҳадиснинг мавзуси қайси?", "o": ["Эзгулик мажмуаси", "Мусулмоннинг ҳурмати", "Мусулмон кишининг қони тўкилмайди", "Жаннат йўли"], "a": 2}, {"q": "Абдуллоҳ ибн Масъуд разияллоҳу анҳу қайси фиқҳ мактабига асос солган?", "o": ["Куфа фиқҳ мактабига", "Басра фиқҳ мактабига", "Мадина фиқҳ мактабига", "Шом фиқҳ мактабига"], "a": 0}, {"q": "«Мусулмон кишининг қони тўкилмайди» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["13", "14", "20", "7"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ислом нима?", "Мусулмон қонининг ҳурмати", "Аллоҳ таоло валийларига душманлик қилиш", "Ароқхўрлик;"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бир жонни қасддан ноҳақ ўлдириш;", "Саҳобаи киромлар ҳамиша динларини яхшироқ ўрганиш ва иймонларини саломат сақлашга ташна бўлишган", "Китобу Суннатдан мисоллар", "Рад этиладиган амаллар"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Турмуш қурганидан кейин зино қилиш;", "Мўмин ҳар битта қулай фурсатни ғанимат билиб, Охирати ғамини емоғи лозим", "Исломнинг барча арконларини тарк этган кишининг ҳукми", "Кийим ва ташқи кўринишни гўзал қилиб юриш"], "a": 0}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ҳадис яна қуйидагиларни ифодалайди", "Аллоҳ азза ва жалла зикрини қилиш кишининг ўзига энг яхши садақадир", "Расулуллоҳ соллаллоҳу алайҳи ва саллам ва асҳоби киромлар зуҳди", "Муртадлик"], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["\"Сизларни нимадан қайтарган бўлсам, ундан йироқ бўлинглар\"", "Ислом дини комил ва бенуқсон диндир", "Тошбўрон", "Солиҳ амаллар инсоннинг жаннатга киришига сабабдир"], "a": 2}], "15": [{"q": "15-ҳадисни ким ривоят қилган?", "o": ["Нўъмон ибн Башир разияллоҳу анҳумо", "Абу Саълаба ал-Хушаний разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу", "Абу Ҳурайра разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Дорақутний ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Байҳақий ривоятлари"], "a": 0}, {"q": "15-ҳадиснинг мавзуси қайси?", "o": ["Ҳақ устида собитқадамлик ва иймон", "Фақат яхши сўзларни сўзламоқ, меҳмон ва қўшни ҳаққига риоя этмоқ иймондандир", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Исломда танглик йўқ"], "a": 1}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["2630 та", "1170 та", "2286 та", "5374 та"], "a": 3}, {"q": "«Фақат яхши сўзларни сўзламоқ, меҳмон ва қўшни ҳаққига риоя этмоқ иймондандир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["11", "6", "15", "18"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Инсон ва унинг жамият билан бўлган алоқаси", "Ҳалоллик, ростгўйлик ва ҳақиқат ҳамиша хотиржамлик- розилик олиб келади. Ҳаром-ҳариш, ботил ва ёлғон фақат шубҳа, гумон ҳамда изтироб олиб келади", "Ниятнинг вақти ва ўрни", "Юқоридагиларнинг барчасига асос тилни тийишдир"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Фақат хайрли сўзларни сўзлаб, беҳуда гаплардан ўзини тиймоқ иймон комиллигидандир", "Саҳобаи киромлар ҳамиша динларини яхшироқ ўрганиш ва иймонларини саломат сақлашга ташна бўлишган", "Ҳадис тарихи", "Ибодатларни қилишдан мақсад"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ислом шариатининг олийлиги", "Кўп гапириш ҳалокатга олиб боради. Тилни беҳуда гаплардан сақламоқ нажотга бошлайди", "Анас разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам Муоз ибн Жабал разияллоҳу анҳуни Яманга жўнатаётиб шундай деганлар:", "Шубҳалардан йироқ бўлиш ҳақида салафлардан қилинган нақллар"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Ким Аллоҳга …»", "o": ["алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "ва Охират кунига иймон келтирган бўлса, яхши сўзларни гапирсин ёки сукут сақласин.", "амални қилса, у албатта рад этилур\".", "Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Покизалик иймоннинг ярмидир."], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Ким Аллоҳга ва Охират кунига иймон …»", "o": ["таоло ўз ҳузурида уни комил яхшилик сифатида ёзиб қўяди.", "ҳаром ва ўзи ҳаром билан озиқланган.", "келтирган бўлса, қўшнисини иззат-икром қилсин.", "етса-да, Менга истиғфор айтсанг, сени мағфират этаман."], "a": 2}], "16": [{"q": "16-ҳадисни ким ривоят қилган?", "o": ["Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Абу Ҳурайра разияллоҳу анҳу", "Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ривоятлари", "Аҳмад ва Доримий ривоятлари", "Дорақутний ривоятлари", "Термизий ривоятлари"], "a": 0}, {"q": "16-ҳадиснинг мавзуси қайси?", "o": ["Фурсатни ғанимат билинг", "Ҳалол ва ҳаром", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Ғазаб қилма - жаннатий бўласан!"], "a": 3}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["2630 та", "2286 та", "5374 та", "1170 та"], "a": 2}, {"q": "«Ғазаб қилма - жаннатий бўласан!» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["39", "15", "38", "16"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмоннинг хулқи", "Мўминнинг вазифаси иложи борича хайрли амалларни кўпайтирмоқдир. Доим Аллоҳ таоло азобидан қўрқиб, хавфсираб туриши эса уни янада кўпроқ амалга чорлайди. Унинг ҳақиқий мусофирга ўхшаши", "Жон (руҳ) пуфланиши", "Комил иймон"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Жаннатга бўлган муҳаббат ва унга олиб борадиган йўлларни излаш", "Тўғри йўлда юриш нима дегани?", "Покиза ва фозил жамият иймон самарасидир", "Ҳавои хоҳишга тўлиқ бўйсуниш уни илоҳ қилиб олишдир!"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳалимлик ва босиқлик дунёю Охират саодатига бошлайди", "Абу Саид Худрий разияллоҳу анҳунинг мазкур ҳадисни ривоят қилишлари", "Мусулмонларга насиҳат", "Эзгулик эшиклари бисёрдир"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: “Бир киши Набий …»", "o": ["соллаллоҳу алайҳи ва салламга: “Менга насиҳат қилинг”, деди.", "динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\".", "айтади: Кимда-ким Менинг дўстим билан адоватлашса, Мен унга уруш эълон қиламан.", "- сукут қилди, бас, улар устида баҳс қилмангиз."], "a": 0}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Тўғрилик аҳамияти", "Солиҳ амаллар инсоннинг жаннатга киришига сабабдир", "“Эй Аллоҳнинг қуллари, ўзаро биродар бўлингиз!”", "Ғазаб барча ёмонликнинг бошидир"], "a": 3}], "17": [{"q": "17-ҳадисни ким ривоят қилган?", "o": ["Муоз ибн Жабал разияллоҳу анҳу", "Шаддод ибн Авс разияллоҳу анҳу", "Анас ибн Молик разияллоҳу анҳу", "Оиша разияллоҳу анҳо"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Бухорий ва Муслим ривоятлари", "Ибн Можа ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "17-ҳадиснинг мавзуси қайси?", "o": ["Иймон асоси шариатга эргашишдир", "Исломда қозилик асослари", "Ҳар бир ишни пухта қилмоқ лозим", "Аллоҳ азза ва жалланинг мағфирати кенгдир"], "a": 2}, {"q": "Шаддод ибн Авс разияллоҳу анҳу қаерда истиқомат қилиб илм тарқатган?", "o": ["Куфада", "Шомда", "Мисрда", "Яманда"], "a": 1}, {"q": "«Ҳар бир ишни пухта қилмоқ лозим» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["20", "30", "33", "17"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ азза ва жалланинг Муҳаммад соллаллоҳу алайҳи ва саллам умматига фазл кўрсатиб бу уммат устидан ҳараж-тангликни кўтариши", "Соғлом муҳит яратиш", "Улуғ ҳикмат", "Барча машруъ яъни шариат рухсат берган амалларни мукаммал ва чиройли адо этмоқ вожибдир"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Насиҳат турларидан бири", "Ғазаб заифлик, ҳалимлик эса қувват белгисидир", "Қатлни пухта ижро этиш", "\"Сизларни нимадан қайтарган бўлсам, ундан йироқ бўлинглар\""], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Оловда ёқиб ўлдириш мумкин эмас", "Қийин аҳволда қолган кишига ёрдам бермоқ", "Мусулмонниг биродари қаршисидаги вазифалари", "Тавҳид ва Ёлғиз Аллоҳ ибодатига ихлос қўйиш билан ҳақ йўлда устивор бўлишга бир-биримизни чақирайлик"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Яъло Шаддод ибн Авс разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи …»", "o": ["кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\".", "ва саллам дедилар: “Аллоҳ таоло ҳар бир ишда яхшиликни ёзгандир.", "ривоят қилиб дедилар: “Аллоҳ таоло деди: - Эй бандаларим, Мен зулмни Ўзимга ҳаром қилдим.", "даражасига ҳеч қачон етолмайсизларки, Менга зарар етказсангизлар!"], "a": 1}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Мусулмон киши ҳаромдан қандай қутулади?", "Қийин аҳволда қолган кишига ёрдам бермоқ", "Мағфират тиламоқ", "Ҳайвонларни боғлаб қўйиб, сўнг уларни ўқ ёки бошқа нарса отиб ўлдириш мумкин эмас"], "a": 3}], "18": [{"q": "18-ҳадисни ким ривоят қилган?", "o": ["Анас ибн Молик разияллоҳу анҳу", "Наввос ибн Самъон разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Дорақутний ривоятлари", "Байҳақий ривоятлари", "Муслим ривоятлари"], "a": 0}, {"q": "18-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ таолодан қўрқиш ва ҳусни хулқ", "Ҳар бир яхшилик садақадир", "Аллоҳ зулмни ҳаром қилди", "Аллоҳ таоло адолати, фазли ва қудрати"], "a": 0}, {"q": "Расулуллоҳ соллаллоҳу алайҳи ва саллам Абу Зарр разияллоҳу анҳуни қайси сифат билан мадҳ этганлар?", "o": ["Хатиблиги билан", "Ростгўйлиги билан", "Шижоати билан", "Саховати билан"], "a": 1}, {"q": "«Аллоҳ таолодан қўрқиш ва ҳусни хулқ» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["26", "38", "18", "15"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳар бир мусулмон фарзанди гўзал ахлоқлар билан хулқланишга интилмоғи лозим. Чунки ҳусни хулқ энг улуғ яхшиликдир", "Ҳадис тарихи", "Ҳақиқий воизнинг сифатлари", "Мункардан қайтармоқ"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Иймон мартабалари", "Ёмонликнинг олдини олиш яхшиликни жалб қилишдан муқаддам туради", "Анас разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам Муоз ибн Жабал разияллоҳу анҳуни Яманга жўнатаётиб шундай деганлар:", "Дунё ғам-ташвишлари сон-саноқсиз ва уларни аритиш йўллари ҳам хилма-хилдир"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Абу Бакр разияллоҳу анҳу билан Умар разияллоҳу анҳу ўрталарида кечган мунозара", "Далил ва унинг турлари", "Фаришталар инсоннинг дилига туккан ниятидан дарак топадилар", "Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Зар - Жундуб ибн Жунода разияллоҳу анҳу ва Абу Абдурраҳмон Муоз ибн Жабал разияллоҳу …»", "o": ["суюклироқ нарса билан Менга қурбат-яқинлик ҳосил қилмаган.", "дедилар: ”Аллоҳ таоло бир қанча фарзларни лозим этди, бас, уларни зое қилмангиз.", "анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Қаерда бўлсанг ҳам,…", "Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!"], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Видолашув пайтида дунё ва Охират учун фойдали бўлган тавсияларни айтмоқ суннатдир", "Улуғ ҳикмат. Яхшилик эшиклари кенг очиқ", "Ҳадис маънолари", "Инсон ер юзида мукаррам халифадир"], "a": 3}], "19": [{"q": "19-ҳадисни ким ривоят қилган?", "o": ["Абу Зарр Ғифорий разияллоҳу анҳу", "Абу Молик ал-Ашъарий разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу", "Абдуллоҳ ибн Аббос разияллоҳу анҳумо"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Байҳақий ривоятлари", "Термизий ривоятлари", "Аҳмад ва Доримий ривоятлари"], "a": 2}, {"q": "19-ҳадиснинг мавзуси қайси?", "o": ["Дин насиҳатдир", "Аллоҳ азза ва жалланинг мағфирати кенгдир", "Яхшилик эшиклари ва ҳидоят йўллари", "Аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати"], "a": 3}, {"q": "Абдуллоҳ ибн Аббос разияллоҳу анҳумо қандай ном билан машҳур?", "o": ["«Форуқ»", "«Аллоҳнинг арслони»", "«Уммат олими» ва «Қуръон таржимони»", "«Сиддиқ»"], "a": 2}, {"q": "«Аллоҳ таоло ҳифзу ҳимояси, мадади ва нусрати» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["19", "20", "22", "4"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Шубҳали нарсаларни тарк этмоқ лозим", "Расулуллоҳ соллаллоҳу алайҳи ва саллам уммат тарбиясига қаттиқ эътибор берганлар", "Юқоридаги ҳадис Исломнинг улкан асослари каторига қўшилади. Зеро, у ҳар бир ишни шариат буюрганидек чиройли ва мукаммал адо этишга чақиради", "Аллоҳ таолонинг мўмин бандаларига раҳмати кенг, мағфирати улуғ ва ажр-мукофоти беҳисобдир"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Инсон нафсини тарбиялаб бормоғи, уни тубан одатлардан нафратланишга ўргатмоғи керак. Ҳақиқий иймон эгалари беҳуда нарсаларга асло эътибор бермайдилар", "Қимматли ўгит беришнинг ҳикматли услуби", "Комил иймон", "Бу ҳадис маънавий қувватларни кучайтиришга, нафсни ичкаридан ислоҳ қилишга бўлган чақириқдир"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳни ёд этгин, Аллоҳ ҳам сени асрайди", "Ҳавои нафсга эргашмоқ маъсият ва бидъат манбаидир", "Ҳадиси шариф кўрсатмаси", "Мусулмонниг биродари қаршисидаги вазифалари"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Аббос Абдуллоҳ ибн Аббос разияллоҳу анҳудан ривоят: Бир куни …»", "o": ["соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "дедилар: \"Аллоҳ покдир ва фақат пок нарсанигина қабул қилади.", "даражасига ҳеч қачон етолмайсизларки, Менга зарар етказсангизлар!", "Набий соллаллоҳу алайҳи ва салламнинг орқаларидан уловларига мингашиб кетардим."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «“Мен сенга бир неча калималарни ўргатаман: Аллоҳнинг …»", "o": ["алайҳи ва саллам дедилар: - Дин бу насиҳатдир.", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "Аллоҳ ҳам, одамлар ҳам мени яхши кўрсин.", "ҳақларини сақлагин - У Зот сени сақлайди."], "a": 3}], "20": [{"q": "20-ҳадисни ким ривоят қилган?", "o": ["Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Абу Саълаба ал-Хушаний разияллоҳу анҳу", "Шаддод ибн Авс разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ривоятлари", "Байҳақий ривоятлари", "Термизий ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "20-ҳадиснинг мавзуси қайси?", "o": ["Ҳаё иймондандир", "Дин насиҳатдир", "Ислоҳ ва адолат", "Ғазаб қилма - жаннатий бўласан!"], "a": 0}, {"q": "Абу Масъуд Уқба ибн Амр нима сабабдан «Бадрий» деб аталган?", "o": ["Исми Бадр бўлгани учун", "Бадр жангида байроқдор бўлгани учун", "Бадр мавзесида яшагани учун", "Бадр қабиласидан бўлгани учун"], "a": 2}, {"q": "«Ҳаё иймондандир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["38", "18", "1", "20"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тўғрилик фойдаси", "Тавба ва истиғфор", "Пайғамбарлар меросидан", "Ғазабни даф этиш ва даволаш йўллари"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Насиҳат қилиш одоблари", "Дуонинг ижобат бўлиш сабаблари а) Узоқ сафарларга чиқиш", "Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:", "Ҳадис маънолари"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмон ҳамиша комилликка интилади", "Барча садақалар холис Аллоҳ учун қилинмоғи шарт", "Ҳаё икки хил бўлади:", "Ҳадисда иймон шохобчаларининг айримлари санаб ўтилган"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Масъуд Уқба ибн Амр Ансорий Бадрий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Одамлар …»", "o": ["Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!", "деганларини эшитдим: “Қай бирингиз бирон ёмон ишни кўрса, уни қўли билан ўзгартирсин.", "орасида аввалги Пайғамбарлардан сақланиб қолган бир гап шуки: агар уялмасанг, хоҳлаган…", "келтирган бўлса, қўшнисини иззат-икром қилсин."], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Аллоҳ таолонинг мўмин бандаларига раҳмати кенг, мағфирати улуғ ва ажр-мукофоти беҳисобдир", "Нафл ибодатлар бандани Аллоҳ таолога яқинлаштиради", "Бемаъни ҳаё", "Ҳадисдан садақа турларини санаб чиқиш кўзда тутилмаган"], "a": 2}], "21": [{"q": "21-ҳадисни ким ривоят қилган?", "o": ["Шаддод ибн Авс разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу", "Абу Молик ал-Ашъарий разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Термизий ривоятлари", "Байҳақий ривоятлари", "Бухорий ривоятлари"], "a": 0}, {"q": "21-ҳадиснинг мавзуси қайси?", "o": ["Ҳалол ва ҳаром", "Ҳақ устида собитқадамлик ва иймон", "Амаллар ниятларга қараб эътибор қилинади", "Яхшилик ва ёмонлик"], "a": 1}, {"q": "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу қайси шаҳарга волий этиб тайинланган?", "o": ["Тоифга", "Куфага", "Маккага", "Басрага"], "a": 0}, {"q": "«Ҳақ устида собитқадамлик ва иймон» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["39", "42", "21", "26"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ботил аҳлига қарши курашмоқ", "Тўғри йўлда юриш нима дегани?", "Қасамдаги хато ва унутиш", "Савол сўраш одоби ва унинг фойдалари"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳадис мазмунидан қуйидаги фиқҳий қоида ҳам келиб чиқади:", "Қасамдан бош тортишга асосланиб ҳукм қилиш", "Инсон тўғри йўлда юриш борасида ҳам ноқис", "Ароқхўрлик;"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тақдирни ҳужжат қилиш", "Она қорнида боланинг ривожланиш босқичлари", "Қалбнинг тўғрилиги", "Сеҳр қилиш;"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Амр Суфён ибн Абдуллоҳ Сақафий разияллоҳу анҳудан ривоят: …»", "o": ["Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!", "икки елкамдан тутиб дедилар: “Дунёда бир ғариб ёки йўловчидек бўлгин”.", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\"."], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: - Аллоҳга …»", "o": ["анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Қаерда бўлсанг ҳам,…", "иймон келтирдим, деб айтгин-да, сўнгра тўғри йўлда юр!", "соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…"], "a": 1}], "22": [{"q": "22-ҳадисни ким ривоят қилган?", "o": ["Жобир ибн Абдуллоҳ разияллоҳу анҳумо", "Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу", "Оиша разияллоҳу анҳо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Аҳмад ва Доримий ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Муслим ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 2}, {"q": "22-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ таоло фазлу марҳамати", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Ғазаб қилма - жаннатий бўласан!", "Жаннат йўли"], "a": 3}, {"q": "Жобир ибн Абдуллоҳ разияллоҳу анҳумо нечта ҳадис ривоят қилган?", "o": ["890 та", "5374 та", "1540 та", "539 та"], "a": 2}, {"q": "«Жаннат йўли» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["18", "13", "22", "8"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мағфират тиламоқ", "\"Эй қалбларни буриб қўйгувчи Зот, менинг қалбимни ўз динингда собит қилгин!\"", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бутун оламларга раҳмат қилиб юборилганлар", "Эҳсон нима?"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Иштибоҳли нарсалар ҳам ўз навбатида бир неча хил бўлади", "Жаннат талабида ҳаракат қилмоқ", "Кўп гапириш ҳалокатга олиб боради. Тилни беҳуда гаплардан сақламоқ нажотга бошлайди", "Дунё фоний, Охират эса боқийдир"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Зулм бандалар учун ҳам ҳаромдир", "Шубҳали нарсаларни тарк этиб, фақат ҳалол-покиза амалларга берилиш хусусида салафларнинг сўзлари ва ишларидан", "Барча машруъ яъни шариат рухсат берган амалларни мукаммал ва чиройли адо этмоқ вожибдир", "Фарзларни адо этиб, ҳаром-ҳаришдан ҳазар қилмоқ нажот гаровидир"], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:", "Нафл ибодатлар бандани Аллоҳ таолога яқинлаштиради", "Зинокорлик;", "Аллоҳ таоло ҳузурида фақат ҳалол-покиза нарсаларгина мақбулдир"], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ароқхўрлик;", "Ҳадисда зикр этилган садақа турлари ва уларнинг ҳукмлари", "Ислом нима?", "Амал қандай қилиб мақбул-покиза бўлади?"], "a": 0}], "23": [{"q": "23-ҳадисни ким ривоят қилган?", "o": ["Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Умар ибн Хаттоб разияллоҳу анҳу", "Анас ибн Молик разияллоҳу анҳу", "Абу Молик ал-Ашъарий разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Аҳмад ва Доримий ривоятлари", "Бухорий ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 0}, {"q": "23-ҳадиснинг мавзуси қайси?", "o": ["Ёмонликнинг олдини олмоқ - исломий бурч!", "Ҳар бир яхшилик садақадир", "Исломда танглик йўқ", "Дин насиҳатдир"], "a": 1}, {"q": "Абу Молик ал-Ашъарий разияллоҳу анҳу қайси юртнинг ашъарийларидан?", "o": ["Миср", "Шом", "Ироқ", "Яман"], "a": 3}, {"q": "«Ҳар бир яхшилик садақадир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["23", "2", "31", "4"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бир-бирларингиздан юз ўгириб, ўртадаги алоқани узмангиз!", "Охиратда ҳисоб-китоб қилмоқ Аллоҳ азза ва жаллага ҳаволадир", "Ислом ҳеч қачон зарарли нарсаларга буюрмайди ва фойдали нарсалардан қайтармайди", "Улуғ ҳикмат"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Таҳорат ва унинг ажри", "Шубҳали нарсаларни тарк этиб, фақат ҳалол-покиза амалларга берилиш хусусида салафларнинг сўзлари ва ишларидан", "Ислом дини комил ва бенуқсон диндир", "Истиғфор ва гуноҳлар"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таоло зикри ва шукронаси", "Аллоҳ таолонинг мўмин бандаларига раҳмати кенг, мағфирати улуғ ва ажр-мукофоти беҳисобдир", "Ҳар бир мусулмон фарзанди гўзал ахлоқлар билан хулқланишга интилмоғи лозим. Чунки ҳусни хулқ энг улуғ яхшиликдир", "Мағфират тиламоқ"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Молик Ҳорис ибн Осим Ашъарий разияллоҳу анҳудан ривоят: …»", "o": ["динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\".", "Аллоҳ ҳам, одамлар ҳам мени яхши кўрсин.", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…", "Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Покизалик иймоннинг ярмидир."], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Намоз нурдир", "Агар икки киши сўкишса ёки бир-бирларига туҳмат ёғдирса, ўртада қасос бўлмайди. Ҳар бири ўз гуноҳига яраша жавоб беради. Аммо уларнинг бирида иккинчисининг ҳақи бор бўлса, уни ҳоким ҳал қилиб", "Инсонни зоҳид қилувчи сабаблар", "Ғазабнинг ҳалокатли оқибатлари"], "a": 0}], "24": [{"q": "24-ҳадисни ким ривоят қилган?", "o": ["Абу Зарр Ғифорий разияллоҳу анҳу", "Оиша разияллоҳу анҳо", "Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Абу Довуд ва Термизий ривоятлари", "Термизий ривоятлари", "Муслим ривоятлари", "Бухорий ривоятлари"], "a": 2}, {"q": "24-ҳадиснинг мавзуси қайси?", "o": ["Ҳалол ва ҳаром", "Дин насиҳатдир", "Аллоҳ зулмни ҳаром қилди", "Яхшилик эшиклари ва ҳидоят йўллари"], "a": 2}, {"q": "Расулуллоҳ соллаллоҳу алайҳи ва саллам Абу Зарр разияллоҳу анҳуни қайси сифат билан мадҳ этганлар?", "o": ["Саховати билан", "Ростгўйлиги билан", "Хатиблиги билан", "Шижоати билан"], "a": 1}, {"q": "«Аллоҳ зулмни ҳаром қилди» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["29", "23", "28", "24"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Матлуб иймон", "Мўмин ҳар битта қулай фурсатни ғанимат билиб, Охирати ғамини емоғи лозим", "Ҳадиси қудсий таърифи", "Эзгулик эшиклари бисёрдир"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Амаллар ниятларга қараб бўлади", "Ғазаб барча ёмонликнинг бошидир", "Аллоҳ зулмни Ўзига ҳаром қилди", "Охиратда ҳисоб-китоб қилмоқ Аллоҳ азза ва жаллага ҳаволадир"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Биз фарзларни бажаришга, ҳадларга риоя қилишга ва ҳаромдан йироқ юришга буюрилганмиз", "Абдуллоҳ ибн Умар разияллоҳу анҳу насиҳатлари", "Ғазаб заифлик, ҳалимлик эса қувват белгисидир", "Зулм бандалар учун ҳам ҳаромдир"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам Аллоҳ азза ва жалладан …»", "o": ["ривоят қилиб дедилар: “Аллоҳ таоло деди: - Эй бандаларим, Мен зулмни Ўзимга ҳаром қилдим.", "ҳаром ва ўзи ҳаром билан озиқланган.", "ҳижрати Аллоҳ ва Расули учун деб эътибор қилинажак.", "учун ҳамда мусулмонларнинг раҳбарлари ва оммалари учун!"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «- Эй бандаларим, сизлар Менга зарар етказиш …»", "o": ["даражасига ҳеч қачон етолмайсизларки, Менга зарар етказсангизлар!", "таоло мен учун умматимнинг билмасдан, унутиб ва мажбурланиб қилган ишларини кечди\".", "учун ҳамда мусулмонларнинг раҳбарлари ва оммалари учун!", "\"Амаллар фақатгина ниятлар билан эътиборлидир ва ҳар бир киши учун унинг ният қилган…"], "a": 0}], "25": [{"q": "25-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо", "Абу Саид ал-Худрий разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Дорақутний ривоятлари", "Байҳақий ривоятлари", "Муслим ривоятлари", "Ибн Можа ривоятлари"], "a": 2}, {"q": "25-ҳадиснинг мавзуси қайси?", "o": ["Ҳаё иймондандир", "Ҳақ устида собитқадамлик ва иймон", "Аллоҳ таоло муҳаббатини қозонмоқ", "Аллоҳ таоло фазлу марҳамати"], "a": 3}, {"q": "Расулуллоҳ соллаллоҳу алайҳи ва саллам Абу Зарр разияллоҳу анҳуни қайси сифат билан мадҳ этганлар?", "o": ["Хатиблиги билан", "Ростгўйлиги билан", "Шижоати билан", "Саховати билан"], "a": 1}, {"q": "«Аллоҳ таоло фазлу марҳамати» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["25", "18", "6", "30"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Меҳмонни иззат-икром қилиш кишининг иймони ва Исломи гўзаллигидандир", "Аллоҳ таолонинг шокир бандалари У Зот марҳамати ва нусратига муносибдирлар", "Фарз ва вожибларга тўлиқ амал қилмоқ", "“Бас, баслашувчи кишилар мана шу йўлда баслашсинлар!”"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Улуғ ҳикмат. Яхшилик эшиклари кенг очиқ", "Бутпараст ва мушрик кимсалар Исломни ҳақ дин деб қабул қилмагунларича уларга қарши уруш эълон қилиниши лозимлигига мазкур ҳадис ҳужжатдир", "Бемаъни ҳаё", "Аллоҳ таоло ва Унинг Расулига муҳаббат"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тақдирни ҳужжат қилиш", "Жаннатга бўлган муҳаббат ва унга олиб борадиган йўлларни излаш", "Бидъатлардан ҳазир бўлинг!", "Аллоҳ азза ва жалла зикрини қилиш кишининг ўзига энг яхши садақадир"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам асҳобларидан …»", "o": ["баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "қонлари ва молларини омон сақлаган бўладилар.", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…", "ва Охират кунига иймон келтирган бўлса, яхши сўзларни гапирсин ёки сукут сақласин."], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бой-бадавлат одамлар ажр-савобларни олиб кетишди-ку: улар биз намоз ўқиганимиздек намоз ўқишади, …»", "o": ["рўза тутганимиздек рўза тутишади ва ошиқча мол-давлатларидан садақа қилишади.", "келтирган бўлса, қўшнисини иззат-икром қилсин.", "амални қилса, у албатта рад этилур\".", "\"Амаллар фақатгина ниятлар билан эътиборлидир ва ҳар бир киши учун унинг ният қилган…"], "a": 0}], "26": [{"q": "26-ҳадисни ким ривоят қилган?", "o": ["Абу Ҳурайра разияллоҳу анҳу", "Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо", "Тамим ибн Авс ад-Дорий разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Аҳмад ва Доримий ривоятлари", "Бухорий ривоятлари", "Бухорий ва Муслим ривоятлари"], "a": 3}, {"q": "26-ҳадиснинг мавзуси қайси?", "o": ["Ислоҳ ва адолат", "Зоҳидлик моҳияти ва унинг самараси", "Ёмонлик ва бидъатларни рад этиш", "Ҳақ устида собитқадамлик ва иймон"], "a": 0}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["1170 та", "5374 та", "2630 та", "2286 та"], "a": 1}, {"q": "«Ислоҳ ва адолат» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["26", "21", "2", "27"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмон раҳбарларга насиҳат", "Амаллар ниятларга қараб бўлади", "Аллоҳ муҳаббатини қозониш", "Инсон суяклари ва бўғинларининг тузилишида улкан илоҳий қудрат намоёндир"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Улуғ фазл", "Солиҳ амаллар инсоннинг жаннатга киришига сабабдир", "Ҳавойи нафсга эргашмоқ ҳасрат-надомат, унга қарши курашмоқ бахт-саодат келтиради", "Соғлиқ-саломатлик учун шукр қилмоқ лозим"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Садақа ҳужжат-бурҳондир", "Ҳалимлик ва босиқлик дунёю Охират саодатига бошлайди", "Шукрнинг турлари", "Ҳадис яна қуйидагиларни таълим беради:"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Инсонлардаги жами аъзолар учун …»", "o": ["Унинг Расулидир\" деб гувоҳлик бериб, намозни адо этмагунларича ва закотни бермагунларича,…", "қуёш чиқадиган ҳар бир кунда садақа мавжуд: Икки киши ўртасида адолат қилишинг - садақа.", "рўза тутганимиздек рўза тутишади ва ошиқча мол-давлатларидан садақа қилишади.", "баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бировнинг уловга минишига ёрдам бериб, уни чиқариб …»", "o": ["кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\".", "ҳам борки, кўпчилик уларни билмайди.", "қўйишинг ёки нарсасини олиб беришинг - садақа.", "динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\"."], "a": 2}], "27": [{"q": "27-ҳадисни ким ривоят қилган?", "o": ["Нўъмон ибн Башир разияллоҳу анҳумо", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу", "Наввос ибн Самъон разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Аҳмад ва Доримий ривоятлари", "Дорақутний ривоятлари", "Байҳақий ривоятлари", "Ибн Можа ривоятлари"], "a": 0}, {"q": "27-ҳадиснинг мавзуси қайси?", "o": ["Ҳақ устида собитқадамлик ва иймон", "Аллоҳ азза ва жалланинг мағфирати кенгдир", "Яхшилик ва ёмонлик", "Ҳалол-покиза юрган кишининг амали мақбулдир!"], "a": 2}, {"q": "27-ҳадиснинг иккинчи ровийси Вобиса ибн Маъбад қайси қабила вакиллари қаторида келган?", "o": ["Асад қабиласи", "Қурайш қабиласи", "Хазраж қабиласи", "Ғифор қабиласи"], "a": 0}, {"q": "«Яхшилик ва ёмонлик» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["18", "27", "4", "39"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Даъвогардан қасам ичиш талаб қилинадими?", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бутун оламларга раҳмат қилиб юборилганлар", "Агар икки киши сўкишса ёки бир-бирларига туҳмат ёғдирса, ўртада қасос бўлмайди. Ҳар бири ўз гуноҳига яраша жавоб беради. Аммо уларнинг бирида иккинчисининг ҳақи бор бўлса, уни ҳоким ҳал қилиб", "Эзгуликнинг таърифи"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Бу ҳадис мўмин кишини ҳалолга, ҳаромдан узоқлашишга, шубҳали нарсаларни тарк қилишга, дини ва обрўсини пок сақлашга, одамларда ёмон гумон уйғотиши мумкин бўлган амаллардан ўзини", "Ҳақни таниш туғма хислатдир", "Муслима аёлнинг ҳаёси", "Мусулмонларга насиҳат"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Гуноҳнинг икки аломати", "Фиқҳнинг тўртдан бири", "Бир жонни қасддан ноҳақ ўлдириш;", "Мусулмон имкон қадар тоат-ибодат ва бошқа хайрли амалларни кўпроқ қилишга шошилади. Ўзининг улуғ орзусига етмоқ учун сусткашлик ҳам, дангасалик ҳам қилмайди. Чунки у ажали қачон"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Наввос ибн Самъон разияллоҳу анҳудан ривоят: Набий соллаллоҳу …»", "o": ["ҳам борки, кўпчилик уларни билмайди.", "баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг."], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Гуноҳ эса кўнглинг хотиржам бўлмаган ва …»", "o": ["баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "амалларини қилиб юради, ҳатто у билан жаннат ўртасида бир газгина масофа қолади.", "одамлар билиб қолишини истамайдиган ишингдир”.", "даъволарига асосланиб сўраган нарсалари берилаверса, кимсалар қавмнинг молию қонини даъво…"], "a": 2}], "28": [{"q": "28-ҳадисни ким ривоят қилган?", "o": ["Ирбоз ибн Сория разияллоҳу анҳу", "Абу Молик ал-Ашъарий разияллоҳу анҳу", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Байҳақий ривоятлари", "Термизий ривоятлари"], "a": 1}, {"q": "28-ҳадиснинг мавзуси қайси?", "o": ["Ёмонлик ва бидъатларни рад этиш", "Аллоҳ азза ва жалланинг мағфирати кенгдир", "Суннатларни маҳкам тутинг! Бидъатлардан йироқ бўлинг!", "Жаннат йўли"], "a": 2}, {"q": "Ирбоз ибн Сория разияллоҳу анҳу қайси гуруҳ саҳобалардан эди?", "o": ["Тоиф аҳлидан", "Аҳли суффадан", "Муҳожирлар бойларидан", "Ансор саркардаларидан"], "a": 1}, {"q": "«Суннатларни маҳкам тутинг! Бидъатлардан йироқ бўлинг!» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["28", "6", "39", "22"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мағфират сабаблари", "Аллоҳ таоло ҳузурида фақат ҳалол-покиза нарсаларгина мақбулдир", "Расулуллоҳ соллаллоҳу алайҳи ва саллам мўъжизалари", "Таъсирли мавъизанинг сифатлари"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Фаришталар инсоннинг дилига туккан ниятидан дарак топадилар", "Аллоҳ таоло зикри ва шукронаси", "Ўтган умматлар ҳалокати сабаблари", "Ҳақиқий воизнинг сифатлари"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ислом билан иймон ўртасидаги фарқ", "Саҳобаи киромлар фазилати. Улар қалбининг мусаффолиги", "Аллоҳ таоло бандаларига енгиллик берур", "Амаллар ниятларга қараб бўлади"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Нажиҳ Ирбоз ибн Сория разияллоҳу анҳудан ривоят: …»", "o": ["қонлари ва молларини омон сақлаган бўладилар.", "соллаллоҳу алайҳи ва салламга: “Менга насиҳат қилинг”, деди.", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бизга мавъиза қилдилар.", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бас, менинг суннатимга ва ҳидоят қилинган, …»", "o": ["саллам шундай деганларини эшитдим: \"Дарҳақиқат, ҳалол нарсалар аниқдир, ҳаром нарсалар…", "ажали, амали ҳамда бахтсиз ёки бахтли эканини ёзиш фармон қилинади.", "тўғри йўлдаги халифалар суннатига эргашингиз!", "ҳам борки, кўпчилик уларни билмайди."], "a": 2}], "29": [{"q": "29-ҳадисни ким ривоят қилган?", "o": ["Муоз ибн Жабал разияллоҳу анҳу", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Абу Зарр Ғифорий разияллоҳу анҳу", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Байҳақий ривоятлари", "Муслим ривоятлари", "Бухорий ривоятлари"], "a": 0}, {"q": "29-ҳадиснинг мавзуси қайси?", "o": ["Яхшилик эшиклари ва ҳидоят йўллари", "Яхшилик ва ёмонлик", "Аллоҳ зулмни ҳаром қилди", "Ислом рукнлари ва буюк асослари"], "a": 0}, {"q": "Расулуллоҳ соллаллоҳу алайҳи ва саллам Муоз ибн Жабални қаерга муаллим ва қози қилиб юборганлар?", "o": ["Шомга", "Мисрга", "Яманга", "Ироққа"], "a": 2}, {"q": "«Яхшилик эшиклари ва ҳидоят йўллари» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["29", "20", "13", "32"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Даъвогардан қасам ичиш талаб қилинадими?", "Ҳаё икки хил бўлади:", "Муоз разияллоҳу анҳу солиҳ амалларга қаттиқ эътибор берганлар", "Ҳадисдан садақа турларини санаб чиқиш кўзда тутилмаган"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:", "Қуръонда истиғфор зикри", "Дуонинг ижобат бўлиш сабаблари а) Узоқ сафарларга чиқиш", "Солиҳ амаллар инсоннинг жаннатга киришига сабабдир"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Китобу Суннатдан мисоллар", "Исломнинг барча арконларини тарк этган кишининг ҳукми", "Шукрнинг турлари", "Ислом рукнларини адо этмоқ"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Муоз ибн Жабал разияллоҳу анҳудан ривоят: Мен Набий соллаллоҳу алайҳи ва салламга: - Ё Расулуллоҳ, …»", "o": ["уни алдамайди ва пастга урмайди.", "менга шундай бир амални айтингки, у мени жаннатга киритиб, дўзахдан узоқлаштирсин, -…", "алайҳи ва саллам дедилар: - Дин бу насиҳатдир.", "ҳаром ва ўзи ҳаром билан озиқланган."], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «- Сен улкан нарса ҳақида сўрадинг, - дедилар Набий соллаллоҳу алайҳи ва саллам - Бироқ …»", "o": ["у Аллоҳ таоло осон қилган кишига осондир: Аллоҳга бирон-бир нарсани шерик этмасдан ибодат…", "Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!", "амалларини қилиб юради, ҳатто у билан жаннат ўртасида бир газгина масофа қолади.", "айтади: Кимда-ким Менинг дўстим билан адоватлашса, Мен унга уруш эълон қиламан."], "a": 0}], "30": [{"q": "30-ҳадисни ким ривоят қилган?", "o": ["Абу Саълаба ал-Хушаний разияллоҳу анҳу", "Умар ибн Хаттоб разияллоҳу анҳу", "Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Абдуллоҳ ибн Умар разияллоҳу анҳумо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Бухорий ва Муслим ривоятлари", "Термизий ривоятлари", "Дорақутний ривоятлари"], "a": 2}, {"q": "30-ҳадиснинг мавзуси қайси?", "o": ["Жаннат йўли", "Дин насиҳатдир", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Ҳақ устида собитқадамлик ва иймон"], "a": 2}, {"q": "Расулуллоҳ соллаллоҳу алайҳи ва саллам Абу Саълабага ниманинг фатҳини башорат қилганлар?", "o": ["Форснинг", "Шомнинг", "Маккангинг", "Мисрнинг"], "a": 1}, {"q": "«Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["32", "29", "41", "30"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Меҳмонни иззат-икром қилиш кишининг иймони ва Исломи гўзаллигидандир", "Тақво нажот йўлидир", "Фарз ва вожибларга тўлиқ амал қилмоқ", "Аниқ билан шак-шубҳа қарама-қарши келиб қолса, қай бири олинади?"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тўғрилик фойдаси", "Оловда ёқиб ўлдириш мумкин эмас", "Енгиллатилаётган ҳукм қийинчилик сабабли буткул тарк қилинмайди", "Аллоҳ таоло белгилаган ҳадларни босиб ўтмаслик"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ислом шариатининг олийлиги", "Ҳаромдан ҳазар қилмоқ", "Ҳадис мазмунидан қуйидаги фиқҳий қоида ҳам келиб чиқади:", "Бутпараст ва мушрик кимсалар Исломни ҳақ дин деб қабул қилмагунларича уларга қарши уруш эълон қилиниши лозимлигига мазкур ҳадис ҳужжатдир"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Саълаба Хушаний Журсум ибн Ношир разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам …»", "o": ["алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "дедилар: ”Аллоҳ таоло бир қанча фарзларни лозим этди, бас, уларни зое қилмангиз.", "баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "менга шундай бир амални айтингки, у мени жаннатга киритиб, дўзахдан узоқлаштирсин, -…"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Баъзи нарсалар хусусида - унутганидан эмас, сизларга марҳамат кўрсатиб, …»", "o": ["\"Амаллар фақатгина ниятлар билан эътиборлидир ва ҳар бир киши учун унинг ният қилган…", "ўзи учун муҳим бўлмаган нарсаларни тарк қилиши унинг Исломи чиройли эканлигидандир”.", "- сукут қилди, бас, улар устида баҳс қилмангиз.", "Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим: - Ё Расулуллоҳ!"], "a": 2}], "31": [{"q": "31-ҳадисни ким ривоят қилган?", "o": ["Тамим ибн Авс ад-Дорий разияллоҳу анҳу", "Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо"], "a": 2}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Байҳақий ривоятлари", "Дорақутний ривоятлари", "Ибн Можа ривоятлари"], "a": 3}, {"q": "31-ҳадиснинг мавзуси қайси?", "o": ["Ислом, иймон ва эҳсон", "Аллоҳ зулмни ҳаром қилди", "Зоҳидлик моҳияти ва унинг самараси", "Ҳар бир ишни пухта қилмоқ лозим"], "a": 2}, {"q": "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳунинг алоҳида хусусияти нима?", "o": ["Хайбар фотиҳи бўлган", "Мадинада саҳобалардан энг охири вафот этган", "Биринчи муаззин бўлган", "Энг ёш саҳобий бўлган"], "a": 1}, {"q": "«Зоҳидлик моҳияти ва унинг самараси» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["9", "22", "39", "31"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Катта зарар юзага келишидан қўрқиб наҳий мункарни тарк қилмоқ", "Қасамдан бош тортишга асосланиб ҳукм қилиш", "Зоҳидликнинг маъноси", "Комил иймон"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Тўғри йўлда юриш нима дегани?", "Ислом ақида ва амалдан иборат яхлит нарсадир", "Зоҳидлик турлари", "Даъвогарнинг ҳужжати — далил-исбот, инкор қилувчининг ҳужжати — қасам"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Инсонни зоҳид қилувчи сабаблар", "Болани олдириб ташлаш ҳаромдир", "Зинокорлик;", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бутун оламларга раҳмат қилиб юборилганлар"], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абул Аббос Саҳл ибн Саъд Соидий разияллоҳу анҳудан ривоят: Бир киши Расулуллоҳ …»", "o": ["соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "сонларига қўйиб, деди: - Эй Муҳаммад!", "уни алдамайди ва пастга урмайди.", "дедилар: \"Аллоҳ покдир ва фақат пок нарсанигина қабул қилади."], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Менга шундай бир амални кўрсатингки, агар уни қилсам, …»", "o": ["кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг.", "Аллоҳ ҳам, одамлар ҳам мени яхши кўрсин.", "таоло мен учун умматимнинг билмасдан, унутиб ва мажбурланиб қилган ишларини кечди\".", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…"], "a": 1}], "32": [{"q": "32-ҳадисни ким ривоят қилган?", "o": ["Абу Саид ал-Худрий разияллоҳу анҳу", "Абу Масъуд Уқба ибн Амр разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Абдуллоҳ ибн Аббос разияллоҳу анҳумо"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Термизий ривоятлари", "Бухорий ривоятлари", "Аҳмад ва Доримий ривоятлари"], "a": 0}, {"q": "32-ҳадиснинг мавзуси қайси?", "o": ["Исломда зарар етказиш йўқ", "Фурсатни ғанимат билинг", "Суннатларни маҳкам тутинг! Бидъатлардан йироқ бўлинг!", "Ҳалол ва ҳаром"], "a": 0}, {"q": "Абу Саид ал-Худрий разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["5374 та", "300 та", "1170 та", "2630 та"], "a": 2}, {"q": "«Исломда зарар етказиш йўқ» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["32", "21", "19", "20"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Зоҳидлик турлари", "Инсон учун нима муҳим ва нима кераксиз саналади?", "Ҳадисда зарар етказмоқ инкор этилган. Унинг шаръий жазо ва қасосга дахли йўқ", "Аллоҳ азза ва жаллага муҳтожлик"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ёмон бидъат ва яхши бидъат", "Ҳаромдан ҳазар қилмоқ", "Барча ҳожат Аллоҳ таолодан сўралади", "Ислом ҳеч қачон зарарли нарсаларга буюрмайди ва фойдали нарсалардан қайтармайди"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таоло бандаларига енгиллик берур", "Эзгулик эшиклари бисёрдир", "Соғлом муҳит яратиш", "Динда ҳараж-танглик йўқ"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Саид Саъд ибн Синон ал-Худрий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва …»", "o": ["саллам дедилар: “ зарар бермоқ ҳам, зарар етказмоқ ҳам йўқдир!” .", "ажали, амали ҳамда бахтсиз ёки бахтли эканини ёзиш фармон қилинади.", "саллам шундай деганларини эшитдим: \"Дарҳақиқат, ҳалол нарсалар аниқдир, ҳаром нарсалар…", "сонларига қўйиб, деди: - Эй Муҳаммад!"], "a": 0}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Амаллар ниятларга қараб бўлади", "Мураббий пайғамбар", "Эзгуликнинг таърифи", "Зарарнинг кўринишлари"], "a": 3}], "33": [{"q": "33-ҳадисни ким ривоят қилган?", "o": ["Муоз ибн Жабал разияллоҳу анҳу", "Абдуллоҳ ибн Аббос разияллоҳу анҳумо", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо", "Жобир ибн Абдуллоҳ разияллоҳу анҳумо"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Термизий ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "33-ҳадиснинг мавзуси қайси?", "o": ["Исломда қозилик асослари", "Мусулмоннинг ҳурмати", "Ислом, иймон ва эҳсон", "Ғазаб қилма - жаннатий бўласан!"], "a": 0}, {"q": "Абдуллоҳ ибн Аббос разияллоҳу анҳумо қандай ном билан машҳур?", "o": ["«Аллоҳнинг арслони»", "«Сиддиқ»", "«Форуқ»", "«Уммат олими» ва «Қуръон таржимони»"], "a": 3}, {"q": "«Исломда қозилик асослари» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["33", "29", "41", "14"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Енгиллатилаётган ҳукм қийинчилик сабабли буткул тарк қилинмайди", "Мусулмон киши ҳаромдан қандай қутулади?", "Қасос ва жазо ким томонидан амалга оширилади?", "Ислом шариатининг олийлиги"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Зоҳидлик турлари", "Далил ва унинг турлари", "Сеҳр қилиш;", "Расулуллоҳ соллаллоҳу алайҳи ва салламга насиҳат"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ азза ва жалланинг Муҳаммад соллаллоҳу алайҳи ва саллам умматига фазл кўрсатиб бу уммат устидан ҳараж-тангликни кўтариши", "Ҳаёнинг зидди", "Даъвогарнинг ҳужжати — далил-исбот, инкор қилувчининг ҳужжати — қасам", "Аллоҳ муҳаббатининг мўминдаги асари"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абдуллоҳ ибн Аббос разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Агар одамларнинг …»", "o": ["баъзи бировлар Набий соллаллоҳу алайҳи ва салламга дедилар: - Ё Расулуллоҳ!", "анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Қаерда бўлсанг ҳам,…", "даъволарига асосланиб сўраган нарсалари берилаверса, кимсалар қавмнинг молию қонини даъво…", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…"], "a": 2}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ҳеч бирингиз бошқа бировнинг савдоси устидан савдо қилмангиз!", "Оловда ёқиб ўлдириш мумкин эмас", "Дуонинг ижобат бўлишини нима тўсади?", "Даъвогарнинг ҳужжати жавобгарнинг ҳужжатидан муқаддам туради"], "a": 3}], "34": [{"q": "34-ҳадисни ким ривоят қилган?", "o": ["Наввос ибн Самъон разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Нўъмон ибн Башир разияллоҳу анҳумо", "Абу Саид ал-Худрий разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Муслим ривоятлари", "Байҳақий ривоятлари", "Аҳмад ва Доримий ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "34-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ таоло муҳаббатини қозонмоқ", "Ёмонликнинг олдини олмоқ - исломий бурч!", "Ёмонлик ва бидъатларни рад этиш", "Яхшилик ва ёмонлик"], "a": 1}, {"q": "Абу Саид ал-Худрий разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["1170 та", "2630 та", "5374 та", "300 та"], "a": 0}, {"q": "«Ёмонликнинг олдини олмоқ - исломий бурч!» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["37", "42", "34", "9"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мақбул амаллар", "Абу Саид Худрий разияллоҳу анҳунинг мазкур ҳадисни ривоят қилишлари", "Қайтарилган ишлардан йироқ юринг ва фасодни таг-томири билан йўқотинг", "Дунё ғам-ташвишлари сон-саноқсиз ва уларни аритиш йўллари ҳам хилма-хилдир"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ботил аҳлига қарши курашмоқ", "Беҳуда нарсалар билан машғул бўлиш умрни зое кетказиш ва иймон заифлиги аломатидир", "Ғазаб заифлик, ҳалимлик эса қувват белгисидир", "Бир жонни қасдан ўлдириш;"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Қасос", "Бу ҳадис маънавий қувватларни кучайтиришга, нафсни ичкаридан ислоҳ қилишга бўлган чақириқдир", "Мункардан қайтармоқ", "Абу Зар Ғифорий разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва салламга дедим:"], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Саид Худрий разияллоҳу анҳудан ривоят: Мен Расулуллоҳ соллаллоҳу алайҳи ва салламнинг бундай …»", "o": ["амалларини қилиб юради, ҳатто у билан жаннат ўртасида бир газгина масофа қолади.", "деганларини эшитдим: “Қай бирингиз бирон ёмон ишни кўрса, уни қўли билан ўзгартирсин.", "қуёш чиқадиган ҳар бир кунда садақа мавжуд: Икки киши ўртасида адолат қилишинг - садақа.", "тўғри йўлдаги халифалар суннатига эргашингиз!"], "a": 1}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Инсон нафсини тарбиялаб бормоғи, уни тубан одатлардан нафратланишга ўргатмоғи керак. Ҳақиқий иймон эгалари беҳуда нарсаларга асло эътибор бермайдилар", "Қуръонда истиғфор зикри", "Қуръон ҳужжатдир", "Қурби етса ҳам гуноҳ-маъсиятдан қайтармаслик оқибатлари"], "a": 3}], "35": [{"q": "35-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Абу Ҳурайра разияллоҳу анҳу", "Абу Саълаба ал-Хушаний разияллоҳу анҳу", "Абу Саид ал-Худрий разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Аҳмад ва Доримий ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Байҳақий ривоятлари", "Муслим ривоятлари"], "a": 3}, {"q": "35-ҳадиснинг мавзуси қайси?", "o": ["Исломий биродарлик ва мусулмоннинг ҳақлари", "Зоҳидлик моҳияти ва унинг самараси", "Ҳаё иймондандир", "Ғазаб қилма - жаннатий бўласан!"], "a": 0}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["2630 та", "2286 та", "1170 та", "5374 та"], "a": 3}, {"q": "«Исломий биродарлик ва мусулмоннинг ҳақлари» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["29", "35", "11", "27"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳасад қилманглар а) Ҳасаднинг луғавий ва шаръий таърифи:", "Ҳадиси қудсий таърифи", "Ҳадиси шариф кўрсатмаси", "Тавба ва истиғфор"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Зулм бандалар учун ҳам ҳаромдир", "Бировга зарар бериш мақсадида молнинг баҳосини ошириш ножоизлиги", "Аллоҳ таоло ҳузурида фақат ҳалол-покиза нарсаларгина мақбулдир", "Таъсирли мавъизанинг сифатлари"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Фиқҳнинг тўртдан бири", "Жонли нарсадан нишон сифатида фойдаланиш мумкин эмас", "Сеҳр қилиш;", "Ўзаро нафрат-адоватда бўлмангиз"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Бир-бирингизга ҳасад қилмангиз, …»", "o": ["динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\".", "ҳам борки, кўпчилик уларни билмайди.", "кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\".", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Мусулмон-мусулмоннинг биродаридир: У биродарига зулм қилмайди, …»", "o": ["тўғри йўлдаги халифалар суннатига эргашингиз!", "орасида аввалги Пайғамбарлардан сақланиб қолган бир гап шуки: агар уялмасанг, хоҳлаган…", "уни алдамайди ва пастга урмайди.", "таоло мен учун умматимнинг билмасдан, унутиб ва мажбурланиб қилган ишларини кечди\"."], "a": 2}], "36": [{"q": "36-ҳадисни ким ривоят қилган?", "o": ["Абу Ҳурайра разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Ҳасан ибн Али разияллоҳу анҳумо", "Абу Саълаба ал-Хушаний разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Дорақутний ривоятлари", "Ибн Можа ривоятлари", "Муслим ривоятлари"], "a": 3}, {"q": "36-ҳадиснинг мавзуси қайси?", "o": ["Эзгулик мажмуаси", "Ғазаб қилма - жаннатий бўласан!", "Аллоҳ таоло белгилаб қўйган ҳадлар ва ҳаром ишлар", "Исломда қозилик асослари"], "a": 0}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["1170 та", "2630 та", "2286 та", "5374 та"], "a": 3}, {"q": "«Эзгулик мажмуаси» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["32", "36", "31", "40"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мусулмонлар бир тана аъзоларидир", "Охиратда ҳисоб-китоб қилмоқ Аллоҳ азза ва жаллага ҳаволадир", "\"Қабул қилмайди\" дегани нимани англатади?", "Фарз ва вожибларга тўлиқ амал қилмоқ"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Саҳобаи киромлар фазилати. Улар қалбининг мусаффолиги", "Ҳадис яна қуйидагиларга ундайди:", "Дунё ғам-ташвишлари сон-саноқсиз ва уларни аритиш йўллари ҳам хилма-хилдир", "Тақдирни ҳужжат қилиш"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳаё самараси", "Китобу Суннатдан мисоллар", "Амаллар ниятларга қараб бўлади", "Қиёмат кунининг ғами ва ундан халос бўлмоқ"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Ким бир мўминнинг …»", "o": ["деганларини эшитдим: “Қай бирингиз бирон ёмон ишни кўрса, уни қўли билан ўзгартирсин.", "қўйишинг ёки нарсасини олиб беришинг - садақа.", "ҳаром ва ўзи ҳаром билан озиқланган.", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Ким қийналган кишига енгиллик келтирса, Аллоҳ …»", "o": ["таоло унга дунёю Охиратда енгиллик беради.", "ҳақларини сақлагин - У Зот сени сақлайди.", "уни алдамайди ва пастга урмайди.", "анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Қаерда бўлсанг ҳам,…"], "a": 0}], "37": [{"q": "37-ҳадисни ким ривоят қилган?", "o": ["Нўъмон ибн Башир разияллоҳу анҳумо", "Абдуллоҳ ибн Аббос разияллоҳу анҳумо", "Абу Ҳурайра разияллоҳу анҳу", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Бухорий ривоятлари", "Муслим ривоятлари", "Дорақутний ривоятлари"], "a": 0}, {"q": "37-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ таоло адолати, фазли ва қудрати", "Фурсатни ғанимат билинг", "Исломда қозилик асослари", "Ҳалол-покиза юрган кишининг амали мақбулдир!"], "a": 0}, {"q": "Абдуллоҳ ибн Аббос разияллоҳу анҳумо қандай ном билан машҳур?", "o": ["«Уммат олими» ва «Қуръон таржимони»", "«Сиддиқ»", "«Аллоҳнинг арслони»", "«Форуқ»"], "a": 0}, {"q": "«Аллоҳ таоло адолати, фазли ва қудрати» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["37", "39", "22", "33"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Даъвогарнинг ҳужжати жавобгарнинг ҳужжатидан муқаддам туради", "Эзгуликларни амалга оширмоқ", "Инсон суяклари ва бўғинларининг тузилишида улкан илоҳий қудрат намоёндир", "Иймон нима?"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Саҳобаи киромлар ҳамиша динларини яхшироқ ўрганиш ва иймонларини саломат сақлашга ташна бўлишган", "Солиҳ амаллар инсоннинг жаннатга киришига сабабдир", "Ҳавои нафсга эргашмоқ маъсият ва бидъат манбаидир", "Ёмон амалларни қилмоқ"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мўминнинг вазифаси иложи борича хайрли амалларни кўпайтирмоқдир. Доим Аллоҳ таоло азобидан қўрқиб, хавфсираб туриши эса уни янада кўпроқ амалга чорлайди. Унинг ҳақиқий мусофирга ўхшаши", "Ҳасаналарни ният қилмоқ", "Мусулмон ҳамиша комилликка интилади", "Қимматли ўгит беришнинг ҳикматли услуби"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Агар бир яхшиликни кўнглига тугиб, уни амалга ҳам оширса, Аллоҳ таоло уни ўз …»", "o": ["одамлар билиб қолишини истамайдиган ишингдир”.", "ривоят қилиб дедилар: “Аллоҳ таоло деди: - Эй бандаларим, Мен зулмни Ўзимга ҳаром қилдим.", "ҳузурида ўн ҳасанадан етти юз баробаргача – беҳад зиёдалар билан ёзиб қўяди.", "алайҳи ва саллам дедилар: - Дин бу насиҳатдир."], "a": 2}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Агар банда бир ёмонликни кўнглига тугса-ю, уни қилмаса, Аллоҳ …»", "o": ["сонларига қўйиб, деди: - Эй Муҳаммад!", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "таоло ўз ҳузурида уни комил яхшилик сифатида ёзиб қўяди."], "a": 3}], "38": [{"q": "38-ҳадисни ким ривоят қилган?", "o": ["Муоз ибн Жабал разияллоҳу анҳу", "Абу Ҳурайра разияллоҳу анҳу", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Жобир ибн Абдуллоҳ разияллоҳу анҳумо"], "a": 1}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Байҳақий ривоятлари", "Бухорий ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Дорақутний ривоятлари"], "a": 1}, {"q": "38-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ таоло муҳаббатини қозонмоқ", "Енгиллаштирингиз, оғирлаштирмангиз! Итоат ва ҳалимлик нажотга бошлайди", "Мусулмон кишининг қони тўкилмайди", "Ёмонликнинг олдини олмоқ - исломий бурч!"], "a": 0}, {"q": "Абу Ҳурайра разияллоҳу анҳу нечта ҳадис ривоят қилган?", "o": ["1170 та", "5374 та", "2630 та", "2286 та"], "a": 1}, {"q": "«Аллоҳ таоло муҳаббатини қозонмоқ» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["38", "30", "22", "35"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таолонинг дўстлари", "Нима билан қасам ичиш керак?", "Ҳадис тарихи", "Муртадлик"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таоло валийларига душманлик қилиш", "Ҳаё самараси", "Қалбнинг тўғрилиги", "Ғазаб заифлик, ҳалимлик эса қувват белгисидир"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Инсоннинг бошқа бировга зулм ўтказиши", "Аллоҳ таоло учун суюкли бўлган энг афзал амал фарзларни адо этишдир", "Ароқхўрлик;", "Қасамдан бош тортишга асосланиб ҳукм қилиш"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Ҳурайра разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: \"Аллоҳ таоло …»", "o": ["айтади: Кимда-ким Менинг дўстим билан адоватлашса, Мен унга уруш эълон қиламан.", "- сукут қилди, бас, улар устида баҳс қилмангиз.", "алайҳи ва саллам дедилар: “Яхшилик бу ҳусни хулқдир.", "қуёш чиқадиган ҳар бир кунда садақа мавжуд: Икки киши ўртасида адолат қилишинг - садақа."], "a": 0}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Бандам Мен унинг зиммасига фарз этган амаллардан кўра …»", "o": ["ҳам борки, кўпчилик уларни билмайди.", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…", "суюклироқ нарса билан Менга қурбат-яқинлик ҳосил қилмаган.", "битта дунёвий ташвишини аритса, Аллоҳ таоло унинг Қиёмат кунидаги ташвишларидан бирини…"], "a": 2}], "39": [{"q": "39-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Аббос разияллоҳу анҳумо", "Абдуллоҳ ибн Масъуд разияллоҳу анҳу", "Жобир ибн Абдуллоҳ разияллоҳу анҳумо", "Муоз ибн Жабал разияллоҳу анҳу"], "a": 0}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Ибн Можа ривоятлари", "Термизий ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Муслим ривоятлари"], "a": 0}, {"q": "39-ҳадиснинг мавзуси қайси?", "o": ["Иймон асоси шариатга эргашишдир", "Дин насиҳатдир", "Исломда танглик йўқ", "Енгиллаштирингиз, оғирлаштирмангиз! Итоат ва ҳалимлик нажотга бошлайди"], "a": 2}, {"q": "Абдуллоҳ ибн Аббос разияллоҳу анҳумо қандай ном билан машҳур?", "o": ["«Аллоҳнинг арслони»", "«Уммат олими» ва «Қуръон таржимони»", "«Сиддиқ»", "«Форуқ»"], "a": 1}, {"q": "«Исломда танглик йўқ» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["39", "4", "27", "7"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳадиснинг умумий маъноси", "Дуонинг ижобат бўлиш сабаблари а) Узоқ сафарларга чиқиш", "Ҳижратнинг вожиблиги", "Абу Бакр разияллоҳу анҳу билан Умар разияллоҳу анҳу ўрталарида кечган мунозара"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳаё самараси", "Аллоҳ азза ва жалланинг Муҳаммад соллаллоҳу алайҳи ва саллам умматига фазл кўрсатиб бу уммат устидан ҳараж-тангликни кўтариши", "Даъвогардан қасам ичиш талаб қилинадими?", "Қасос ва жазо ким томонидан амалга оширилади?"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мўмин ҳар битта қулай фурсатни ғанимат билиб, Охирати ғамини емоғи лозим", "Мусулмон раҳбарларга насиҳат", "Аллоҳ таоло учун ғазабланиш", "Адашган, унутган ёки мажбурланган банда барча ҳукмлардан эмас, фақат гуноҳдан фориғ этилган"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абдуллоҳ ибн Аббос разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: \"Аллоҳ …»", "o": ["учун ҳамда мусулмонларнинг раҳбарлари ва оммалари учун!", "ҳузурида ўн ҳасанадан етти юз баробаргача – беҳад зиёдалар билан ёзиб қўяди.", "суюклироқ нарса билан Менга қурбат-яқинлик ҳосил қилмаган.", "таоло мен учун умматимнинг билмасдан, унутиб ва мажбурланиб қилган ишларини кечди\"."], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ҳаёнинг зидди", "Она қорнида боланинг ривожланиш босқичлари", "Мусулмон қонининг ҳурмати", "Китобу Суннатдан мисоллар"], "a": 3}], "40": [{"q": "40-ҳадисни ким ривоят қилган?", "o": ["Абу Зарр Ғифорий разияллоҳу анҳу", "Муоз ибн Жабал разияллоҳу анҳу", "Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Жобир ибн Абдуллоҳ разияллоҳу анҳумо"], "a": 2}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Абу Довуд ва Термизий ривоятлари", "Бухорий ривоятлари", "Муслим ривоятлари"], "a": 2}, {"q": "40-ҳадиснинг мавзуси қайси?", "o": ["Амаллар ниятларга қараб эътибор қилинади", "Фурсатни ғанимат билинг", "Ҳар бир ишни пухта қилмоқ лозим", "Фойдали нарсалар билан машғул бўлиш"], "a": 1}, {"q": "Абдуллоҳ ибн Умар разияллоҳу анҳумо нечта ҳадис ривоят қилган?", "o": ["2630 та", "539 та", "1660 та", "5374 та"], "a": 0}, {"q": "«Фурсатни ғанимат билинг» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["33", "21", "28", "40"], "a": 3}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Ҳадис яна қуйидагиларни ифодалайди", "Даъвогардан қасам ичиш талаб қилинадими?", "Мураббий пайғамбар", "Дуонинг ижобат бўлишини нима тўсади?"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Дунё фоний, Охират эса боқийдир", "Эзгуликнинг таърифи", "Комил тақво", "Қатлни пухта ижро этиш"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Унутувчи маъзур саналмайдиган ишлар", "Ҳавои нафсга эргашмоқ маъсият ва бидъат манбаидир", "Тўғрилик фойдаси", "Дунё Охират учун кўприкдир"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абдуллоҳ ибн Умар разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам …»", "o": ["кунига ишонишинг ҳамда тақдирнинг яхшисию ёмонига иймон келтиришинг.", "кўп савол бераверишлари ва кўрсатмаларига хилоф иш қилишлари бўлган\".", "соллаллоҳу алайҳи ва саллам ҳузурларига келиб, деди: - Ё Расулуллоҳ!", "икки елкамдан тутиб дедилар: “Дунёда бир ғариб ёки йўловчидек бўлгин”."], "a": 3}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Соғлом муҳит яратиш", "Абдуллоҳ ибн Умар разияллоҳу анҳу насиҳатлари", "Бировга зарар бериш мақсадида молнинг баҳосини ошириш ножоизлиги", "Тақвога чақириш"], "a": 1}], "41": [{"q": "41-ҳадисни ким ривоят қилган?", "o": ["Муоз ибн Жабал разияллоҳу анҳу", "Шаддод ибн Авс разияллоҳу анҳу", "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумо", "Саҳл ибн Саъд ас-Соидий разияллоҳу анҳу"], "a": 2}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Термизий ривоятлари", "Ибн Можа ривоятлари", "Дорақутний ривоятлари", "Муслим ривоятлари"], "a": 0}, {"q": "41-ҳадиснинг мавзуси қайси?", "o": ["Ғазаб қилма - жаннатий бўласан!", "Исломий биродарлик ва мусулмоннинг ҳақлари", "Мусулмон кишининг қони тўкилмайди", "Иймон асоси шариатга эргашишдир"], "a": 3}, {"q": "Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳумонинг ҳадис ёзиб борган саҳифаси қандай номланган?", "o": ["«ал-Муватто»", "«ал-Муснад»", "«ас-Саҳифа ас-Содиқа»", "«ас-Саҳиҳ»"], "a": 2}, {"q": "«Иймон асоси шариатга эргашишдир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["33", "41", "36", "4"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Аллоҳ таоло билан машғул қалб ўзи учун кераксиз бўлган ишларга эътибор бермайди", "Таҳорат ва унинг ажри", "Мусулмон ҳамиша комилликка интилади", "Қиёмат кунининг ғами ва ундан халос бўлмоқ"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мункардан қайтармоқ", "Дунё Охират учун кўприкдир", "Ҳавои хоҳиш моҳияти ва унинг турлари", "Мусулмонларга насиҳат"], "a": 2}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Амал қандай қилиб мақбул-покиза бўлади?", "Ҳавои нафсга эргашмоқ маъсият ва бидъат манбаидир", "Мусулмонниг биродари қаршисидаги вазифалари", "Муоз разияллоҳу анҳу солиҳ амалларга қаттиқ эътибор берганлар"], "a": 1}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Абу Муҳаммад Абдуллоҳ ибн Амр ибн Ос разияллоҳу анҳудан ривоят: Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: «Сизлардан …»", "o": ["қўйишинг ёки нарсасини олиб беришинг - садақа.", "ҳеч бирингиз - токи унинг хоҳиш-истаклари мен олиб келган нарсага бўйсунмагунча, - мўмин…", "- сукут қилди, бас, улар устида баҳс қилмангиз.", "Расулуллоҳ соллаллоҳу алайҳи ва саллам дедилар: “Покизалик иймоннинг ярмидир."], "a": 1}, {"q": "Ушбу ҳадис сабоқларидан бирини кўрсатинг:", "o": ["Ниятнинг вақти ва ўрни", "Ҳавои хоҳишга тўлиқ бўйсуниш уни илоҳ қилиб олишдир!", "Боқий насиҳат", "Энг гўзал ахлоқ"], "a": 1}], "42": [{"q": "42-ҳадисни ким ривоят қилган?", "o": ["Абдуллоҳ ибн Умар разияллоҳу анҳумо", "Абдуллоҳ ибн Аббос разияллоҳу анҳумо", "Суфён ибн Абдуллоҳ ас-Сақафий разияллоҳу анҳу", "Анас ибн Молик разияллоҳу анҳу"], "a": 3}, {"q": "Ушбу ҳадис қайси манбада келтирилган?", "o": ["Бухорий ва Муслим ривоятлари", "Термизий ривоятлари", "Муслим ривоятлари", "Ибн Можа ривоятлари"], "a": 1}, {"q": "42-ҳадиснинг мавзуси қайси?", "o": ["Аллоҳ азза ва жалланинг мағфирати кенгдир", "Яхшилик ва ёмонлик", "Енгиллаштирингиз, оғирлаштирмангиз! Итоат ва ҳалимлик нажотга бошлайди", "Аллоҳ зулмни ҳаром қилди"], "a": 0}, {"q": "Анас ибн Молик разияллоҳу анҳу Расулуллоҳ соллаллоҳу алайҳи ва салламга неча йил хизмат қилган?", "o": ["Беш йил", "Йигирма йил", "Ўн йил", "Уч йил"], "a": 2}, {"q": "«Аллоҳ азза ва жалланинг мағфирати кенгдир» мавзусидаги ҳадис нечанчи ҳадис?", "o": ["23", "42", "8", "12"], "a": 1}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мағфират сабаблари", "Қиёмат ва унинг аломатлари", "Ғазаб барча ёмонликнинг бошидир", "Ниятнинг вақти ва ўрни"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Мағфират тиламоқ", "Барча садақалар холис Аллоҳ учун қилинмоғи шарт", "Ғазабни даф этиш ва даволаш йўллари", "Эзгуликларни амалга оширмоқ"], "a": 0}, {"q": "Қуйидагилардан қайси бири ушбу ҳадисдан олинадиган сабоқлардан?", "o": ["Дуони ижобат қилгувчи Зотга қилинади", "Мўминлар ҳаётларини фақат аниқ ишончли асослар устига қурмоқлари лозим", "Бир жонни қасддан ноҳақ ўлдириш;", "Аллоҳ таоло бандасига сўраганидан ҳам хайрлироқ неъматни беради"], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Эй Одам боласи, агар гуноҳинг булутларга қадар …»", "o": ["тўғри йўлдаги халифалар суннатига эргашингиз!", "сунъий равишда молнинг нархини оширмангиз,38 ўзаро нафрат-адоватда бўлмангиз,…", "ҳеч бирингиз - токи унинг хоҳиш-истаклари мен олиб келган нарсага бўйсунмагунча, - мўмин…", "етса-да, Менга истиғфор айтсанг, сени мағфират этаман."], "a": 3}, {"q": "Ҳадис матнидаги жумланинг давомини топинг: «Эй Одам боласи, агар сен ҳузуримга ер юзини қоплайдиган гуноҳлар билан келсанг ва Менга ҳеч нарсани шерик …»", "o": ["динимизда асли йўқ бўлган нарсани пайдо қилса, у албатта рад этилур\".", "Расулуллоҳ соллаллоҳу алайҳи ва саллам бизга мавъиза қилдилар.", "ажали, амали ҳамда бахтсиз ёки бахтли эканини ёзиш фармон қилинади.", "қилмаган ҳолда рўбарў бўлсанг, Мен сени ер юзини қоплайдиган мағфират билан қарши…"], "a": 3}]}</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
@@ -5594,15 +5770,27 @@ try{
 
 function openCard(card){
   document.querySelectorAll('.card.open').forEach(function(c){
+    if(c === card) return;
     c.classList.remove('open');
-    c.querySelector('.card-body').style.maxHeight = '0px';
+    var ob = c.querySelector('.card-body');
+    ob.style.transition = 'none';
+    ob.style.maxHeight = '0px';
+    void ob.offsetHeight;
+    ob.style.transition = '';
     c.querySelector('.card-head').setAttribute('aria-expanded','false');
   });
   card.classList.add('open');
   var body = card.querySelector('.card-body');
   body.style.maxHeight = body.scrollHeight + 'px';
   card.querySelector('.card-head').setAttribute('aria-expanded','true');
-  setTimeout(function(){ if(card.scrollIntoView) card.scrollIntoView({behavior:'smooth', block:'start'}); }, 250);
+  var scrolled = false;
+  function doScroll(){
+    if(scrolled) return;
+    scrolled = true;
+    if(card.scrollIntoView) card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  body.addEventListener('transitionend', doScroll, {once:true});
+  setTimeout(doScroll, 600);
 }
 function toggle(n){
   var card = document.getElementById('h'+n);
@@ -5622,12 +5810,20 @@ function jumpTo(v){
   openCard(document.getElementById('h'+n));
 }
 var curQ = '';
-function filterCards(q){ curQ = (q||'').trim().toLowerCase(); applyFilter(); }
+var curMavzu = '';
+function filterCards(q){ curQ = (q||'').trim().toLowerCase(); if(curQ) clearMavzu(false); applyFilter(); }
 function applyFilter(){
   document.querySelectorAll('.card').forEach(function(c){
     var okQ = (!curQ || c.dataset.title.indexOf(curQ) !== -1);
-    var id = c.id;
-    c.style.display = okQ ? '' : 'none';
+    var okM = (!curMavzu || c.dataset.mavzu === curMavzu);
+    var show = okQ && okM;
+    var wasHidden = c.style.display === 'none';
+    c.style.display = show ? '' : 'none';
+    if(show && wasHidden){
+      c.classList.remove('card-in');
+      void c.offsetWidth;
+      c.classList.add('card-in');
+    }
   });
 }
 
@@ -5687,6 +5883,118 @@ var HTITLES = {};
 })();
 function openQuiz(){ document.getElementById('quiz').style.display='block'; document.body.style.overflow='hidden'; }
 function closeQuiz(){ document.getElementById('quiz').style.display='none'; document.body.style.overflow=''; }
+
+/* ================= MAVZU BO'YICHA FILTRLASH ================= */
+var MAVZULAR = [
+  {key:'niyat',   icon:'🎯', cyr:'Ният ва ихлос',            lat:'Niyat va Ixlos',            ru:'Намерение и искренность'},
+  {key:'iymon',   icon:'🕌', cyr:'Иймон асослари',           lat:'Iymon asoslari',            ru:'Основы веры'},
+  {key:'halol',   icon:'⚖️', cyr:'Ҳалол-ҳаром ва тақво',      lat:"Halol-harom va taqvo",      ru:'Дозволенное и богобоязненность'},
+  {key:'axloq',   icon:'🤝', cyr:'Ахлоқ ва одоб',            lat:'Axloq va odob',             ru:'Нравственность и этикет'},
+  {key:'birodar', icon:'💞', cyr:'Биродарлик ва ҳақлар',      lat:'Birodarlik va haqlar',      ru:'Братство и права'},
+  {key:'ibodat',  icon:'🕋', cyr:'Ибодат ва эҳсон',           lat:'Ibodat va ehson',           ru:'Поклонение и ихсан'},
+  {key:'adolat',  icon:'⚡', cyr:'Адолат ва зулм',            lat:'Adolat va zulm',            ru:'Справедливость и несправедливость'},
+  {key:'sadaqa',  icon:'💰', cyr:'Садақа ва яхшилик',         lat:'Sadaqa va yaxshilik',       ru:'Милостыня и добро'},
+  {key:'sunnat',  icon:'📿', cyr:'Суннат ва илм',             lat:'Sunnat va ilm',             ru:'Сунна и знание'},
+  {key:'dunyo',   icon:'🌍', cyr:'Дунё ва охират',            lat:'Dunyo va oxirat',           ru:'Мирское и вечное'}
+];
+function mavzuCount(key){
+  return document.querySelectorAll('.card[data-mavzu="'+key+'"]').length;
+}
+function renderMavzuGrid(){
+  var grid = document.getElementById('mavzuGrid');
+  if(!grid || grid.children.length) return;
+  MAVZULAR.forEach(function(m){
+    var n = mavzuCount(m.key);
+    var el = document.createElement('div');
+    el.className = 'mavzu-card';
+    el.onclick = function(){ applyMavzu(m.key, m); };
+    el.innerHTML = '<span class="mv-icon">'+m.icon+'</span>' +
+      '<span class="mv-name"><span class="v-cyr">'+m.cyr+'</span><span class="v-lat">'+m.lat+'</span><span class="v-ru">'+m.ru+'</span></span>' +
+      '<span class="mv-count">'+n+'&nbsp;<span class="v-cyr">ҳадис</span><span class="v-lat">hadis</span><span class="v-ru">хадисов</span></span>';
+    grid.appendChild(el);
+  });
+}
+function openMavzu(){
+  renderMavzuGrid();
+  document.getElementById('mavzu').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeMavzu(){ document.getElementById('mavzu').style.display='none'; document.body.style.overflow=''; }
+function applyMavzu(key, meta){
+  curMavzu = key;
+  document.getElementById('q').value = '';
+  curQ = '';
+  closeMavzu();
+  applyFilter();
+  var chip = document.getElementById('mavzuChip');
+  var txt = document.getElementById('mavzuChipTxt');
+  if(meta){
+    txt.innerHTML = '<span class="v-cyr">'+meta.cyr+'</span><span class="v-lat">'+meta.lat+'</span><span class="v-ru">'+meta.ru+'</span>';
+  }
+  chip.style.display = 'flex';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function clearMavzu(refresh){
+  curMavzu = '';
+  document.getElementById('mavzuChip').style.display = 'none';
+  if(refresh !== false) applyFilter();
+}
+
+/* ================= QORONG'I REJIM ================= */
+var DARK_LABELS = [
+  {icon:'☀️', cyr:'Ёруғ', lat:"Yorug'", ru:'Светлый'},
+  {icon:'🌗', cyr:'Ўрта', lat:"O'rta", ru:'Средний'},
+  {icon:'🌘', cyr:'Паст', lat:'Past', ru:'Тёмный'},
+  {icon:'🌑', cyr:'Жуда паст', lat:'Juda past', ru:'Очень тёмный'}
+];
+var darkLevel = 0;
+try{ darkLevel = parseInt(localStorage.getItem('arbain_dark')||'0', 10) || 0; }catch(e){}
+function renderDarkBtn(){
+  var b = document.getElementById('darkBtn');
+  if(!b) return;
+  var d = DARK_LABELS[darkLevel];
+  b.innerHTML = d.icon + ' <span class="v-cyr">'+d.cyr+'</span><span class="v-lat">'+d.lat+'</span><span class="v-ru">'+d.ru+'</span>';
+}
+function applyDark(){
+  if(darkLevel === 0) document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', String(darkLevel));
+  try{ localStorage.setItem('arbain_dark', String(darkLevel)); }catch(e){}
+  renderDarkBtn();
+}
+function toggleDark(){
+  darkLevel = (darkLevel + 1) % 4;
+  applyDark();
+}
+applyDark();
+
+/* ================= ROVIYLAR RASMI (lazy-load) ================= */
+var roviyLoaded = false;
+function openRoviy(){
+  document.getElementById('roviyModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  if(!roviyLoaded){
+    roviyLoaded = true;
+    var img = new Image();
+    img.src = 'roviylar.webp';
+    img.alt = "Arba'in an-Nawaviy — roviylar statistikasi";
+    img.loading = 'eager';
+    img.onload = function(){
+      var wrap = document.getElementById('roviyImgWrap');
+      wrap.innerHTML = '';
+      wrap.appendChild(img);
+    };
+    img.onerror = function(){
+      document.getElementById('roviyLoading').innerHTML =
+        '<span class="v-cyr">Расмни юклаб бўлмади. Интернет алоқасини текшириб, қайта уриниб кўринг.</span>' +
+        '<span class="v-lat">Rasmni yuklab bo\'lmadi. Internet aloqasini tekshirib, qayta urinib ko\'ring.</span>' +
+        '<span class="v-ru">Не удалось загрузить изображение. Проверьте подключение и попробуйте снова.</span>';
+    };
+  }
+}
+function closeRoviy(){
+  document.getElementById('roviyModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
 function show(step){
   ['qStep1','qStep2','qStep3'].forEach(function(x){ document.getElementById(x).style.display = (x===step)?'':'none'; });
 }
@@ -5959,6 +6267,16 @@ document.addEventListener('click', function(e){
 if('serviceWorker' in navigator && location.protocol === 'https:'){
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
+/* ============ TEZKOR YO'L (PWA shortcuts) ============ */
+(function(){
+  try{
+    var params = new URLSearchParams(location.search);
+    var open = params.get('open');
+    if(open === 'quiz') setTimeout(openQuiz, 300);
+    else if(open === 'mavzu') setTimeout(openMavzu, 300);
+    else if(open === 'roviy') setTimeout(openRoviy, 300);
+  }catch(e){}
+})();
 
 /* ============ SHRIFT KATTALIGI ============ */
 var fsLevel = 0;
