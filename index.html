@@ -6086,6 +6086,7 @@ var CERT_POS = {nameX:0.5537, nameY:0.5013, nameSize:0.0247, dateY:0.6862, dateS
 
 /* test topshirilganda kanalga avtomatik xabar — GET-rasm usuli, barcha muhitlarda ishlaydi */
 function autoNotify(){
+  if(!TG_TOKEN) return;
   try{
     var st = qState;
     var txt = '🌸 ' + st.name + ' ' + st.sur + ' — ' + st.n + '-ҳадис тестини муваффақиятли топширди: ' +
@@ -6160,12 +6161,16 @@ function drawCert(){
   }
 }
 
-var TG_TOKEN = String.fromCharCode(56,50,50,52,57,53,53,57,49,53,58,65,65,71,85,82,115,66,65,54,114,90,112,79,112,99,77,72,76,65,97,85,86,121,66,83,120,53,71,50,105,67,122,102,83,48);
+/* XAVFSIZLIK: bot tokeni koddan olib tashlandi — ochiq repoda saqlash mumkin emas.
+   Telegram'ga yuborish uchun tokenni server tomonda (masalan, Cloudflare Worker proxy)
+   saqlang va TG_TOKEN o'rniga worker URL'idan foydalaning. */
+var TG_TOKEN = '';
 var TG_CHAT = '@arbainsavoljavob';
 function sendCert(){
   var cv = document.getElementById('qCert');
   var status = document.getElementById('qSendStatus');
   var btn = document.getElementById('qSendBtn');
+  if(!TG_TOKEN){ status.textContent = 'Yuborish vaqtincha o\'chirilgan — sertifikatni yuklab olib, kanalga o\'zingiz joylang: @arbainsavoljavob'; return; }
   if(!cv.toBlob){ status.textContent = 'Brauzer qoʻllab-quvvatlamaydi'; return; }
   btn.disabled = true;
   status.textContent = '⏳ Юборилмоқда… / Yuborilmoqda…';
