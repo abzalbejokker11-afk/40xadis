@@ -6086,14 +6086,13 @@ var CERT_POS = {nameX:0.5537, nameY:0.5013, nameSize:0.0247, dateY:0.6862, dateS
 
 /* test topshirilganda kanalga avtomatik xabar — GET-rasm usuli, barcha muhitlarda ishlaydi */
 function autoNotify(){
-  if(!TG_TOKEN) return;
+  if(!TG_PROXY) return;
   try{
     var st = qState;
     var txt = '🌸 ' + st.name + ' ' + st.sur + ' — ' + st.n + '-ҳадис тестини муваффақиятли топширди: ' +
               st.score + '/10\n🆔 ' + st.certId;
-    var im = new Image();
-    im.src = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage?chat_id=' +
-             encodeURIComponent(TG_CHAT) + '&text=' + encodeURIComponent(txt) + '&r=' + Date.now();
+    fetch(TG_PROXY, {method:'POST', headers:{'content-type':'application/json'},
+      body: JSON.stringify({text: txt})}).catch(function(){});
   }catch(e){}
 }
 function drawCert(){
@@ -6161,23 +6160,22 @@ function drawCert(){
   }
 }
 
-/* XAVFSIZLIK: bot tokeni koddan olib tashlandi — ochiq repoda saqlash mumkin emas.
-   Telegram'ga yuborish uchun tokenni server tomonda (masalan, Cloudflare Worker proxy)
-   saqlang va TG_TOKEN o'rniga worker URL'idan foydalaning. */
-var TG_TOKEN = '';
+/* XAVFSIZLIK: bot tokeni Cloudflare Worker'da (Secret) saqlanadi — cloudflare-worker.js ga qarang.
+   Worker'ni joylashtirgach, URL'ini TG_PROXY ga yozing. */
+var TG_PROXY = ''; /* masalan: 'https://qirq-hadis-tg.USERNAME.workers.dev' */
 var TG_CHAT = '@arbainsavoljavob';
 function sendCert(){
   var cv = document.getElementById('qCert');
   var status = document.getElementById('qSendStatus');
   var btn = document.getElementById('qSendBtn');
-  if(!TG_TOKEN){ status.textContent = 'Yuborish vaqtincha o\'chirilgan — sertifikatni yuklab olib, kanalga o\'zingiz joylang: @arbainsavoljavob'; return; }
+  if(!TG_PROXY){ status.textContent = 'Yuborish vaqtincha o\'chirilgan — sertifikatni yuklab olib, kanalga o\'zingiz joylang: @arbainsavoljavob'; return; }
   if(!cv.toBlob){ status.textContent = 'Brauzer qoʻllab-quvvatlamaydi'; return; }
   btn.disabled = true;
   status.textContent = '⏳ Юборилмоқда… / Yuborilmoqda…';
   cv.toBlob(function(blob){
     var caption = '🌸 Қирқ ҳадис сертификати\n👤 ' + qState.name + ' ' + qState.sur +
       '\n📖 ' + qState.n + '-ҳадис — натижа: ' + qState.score + '/10\n🆔 ' + qState.certId;
-    var url = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendDocument';
+    var url = TG_PROXY + '/sendDocument';
     function makeFD(){
       var fd = new FormData();
       fd.append('chat_id', TG_CHAT);
@@ -6220,7 +6218,7 @@ function sendViaForm(blob, caption){
     document.body.appendChild(ifr);
   }
   var form = document.createElement('form');
-  form.action = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendDocument';
+  form.action = TG_PROXY + '/sendDocument';
   form.method = 'POST'; form.enctype = 'multipart/form-data'; form.encoding = 'multipart/form-data';
   form.target = 'tgFrame'; form.style.display = 'none';
   function add(n,v){ var i=document.createElement('input'); i.type='hidden'; i.name=n; i.value=v; form.appendChild(i); }
