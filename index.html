@@ -344,7 +344,8 @@ html[data-lang="lat"] .v-cyrru{display:none!important}
 @media(max-width:480px){.act-row{gap:6px}.act-btn{font-size:11px;padding:6px 10px}}
 
 /* ---------- shrift kattaligi ---------- */
-.fs-wrap{display:flex;gap:6px;align-items:center}
+.fs-wrap{position:fixed;right:12px;top:100px;z-index:85;display:flex;flex-direction:column;gap:8px;align-items:center}
+@media(max-width:480px){.fs-wrap{right:8px;top:88px;gap:6px}}
 .fs-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--rose-l);background:#fff;
   color:var(--rose-d);font-family:'Playfair Display',serif;font-size:14px;font-weight:700;cursor:pointer;
   box-shadow:0 4px 14px rgba(201,79,124,.10);transition:.2s}
@@ -431,7 +432,10 @@ html[data-fs="-1"] .uz-text{font-size:14.5px}
   background:#fff;color:var(--rose-d);font-family:'Lora',serif;font-size:13px;cursor:pointer;
   position:relative;transition:.2s}
 .nav-chip:hover{border-color:var(--rose)}
-.nav-chip.active{background:linear-gradient(135deg,var(--rose),var(--rose-d));color:#fff;border-color:var(--rose-d)}
+.nav-chip.active{background:linear-gradient(135deg,var(--rose),var(--rose-d));color:#fff;border-color:var(--rose-d);animation:navPulse .32s ease}
+@keyframes navPulse{0%{transform:scale(1)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.sound-open-btn{border-color:#d8c58f;color:#8a6d1f;background:#fdfaf0}
+.sound-open-btn:hover{border-color:#c9a227}
 .nav-chip.memorized::after{content:"";position:absolute;top:0;right:0;width:9px;height:9px;
   border-radius:50%;background:#2e8b57;border:1.5px solid #fff}
 /* ---------- oldingi/keyingi panel ---------- */
@@ -565,6 +569,7 @@ html[data-theme="1"] .ar-text,html[data-theme="2"] .ar-text,html[data-theme="3"]
     <button class="lang-btn mavzu-open-btn" onclick="openMavzu()"><span class="v-cyr">🏷️ Мавзулар</span><span class="v-lat">🏷️ Mavzular</span><span class="v-ru">🏷️ Темы</span></button>
     <button class="lang-btn dark-open-btn" id="darkBtn" onclick="toggleDark()"></button>
     <button class="lang-btn roviy-open-btn" onclick="openRoviy()"><span class="v-cyr">👥 Ровийлар</span><span class="v-lat">👥 Roviylar</span><span class="v-ru">👥 Передатчики</span></button>
+    <button class="lang-btn sound-open-btn" id="soundBtn" onclick="toggleSound()"></button>
   </div>
 </header>
 
@@ -6332,6 +6337,43 @@ function setFS(d){
   applyFS();
 }
 applyFS();
+/* ============ OVOZ (TIQIR-TIQIR) + ANIMATSIYA ============ */
+var soundOn = false;
+try{ soundOn = localStorage.getItem('arbain_sound')==='1'; }catch(e){}
+var _actx = null;
+function tick(){
+  if(!soundOn) return;
+  try{
+    _actx = _actx || new (window.AudioContext||window.webkitAudioContext)();
+    if(_actx.state==='suspended') _actx.resume();
+    var o=_actx.createOscillator(), g=_actx.createGain(), t=_actx.currentTime;
+    o.type='square'; o.frequency.setValueAtTime(1350, t); o.frequency.exponentialRampToValueAtTime(760, t+0.03);
+    g.gain.setValueAtTime(0.0009, t);
+    g.gain.exponentialRampToValueAtTime(0.14, t+0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+0.045);
+    o.connect(g); g.connect(_actx.destination);
+    o.start(t); o.stop(t+0.05);
+  }catch(e){}
+}
+function renderSoundBtn(){
+  var b=document.getElementById('soundBtn'); if(!b) return;
+  var ic = soundOn ? '🔊' : '🔇';
+  b.innerHTML = ic + ' <span class="v-cyr">Овоз</span><span class="v-lat">Ovoz</span><span class="v-ru">Звук</span>';
+}
+function toggleSound(){
+  soundOn = !soundOn;
+  try{ localStorage.setItem('arbain_sound', soundOn?'1':'0'); }catch(e){}
+  renderSoundBtn();
+  if(soundOn) tick();
+}
+renderSoundBtn();
+var _lastTickY = (typeof window!=='undefined') ? window.scrollY : 0, _tickAcc = 0;
+window.addEventListener('scroll', function(){
+  if(!soundOn) return;
+  var y = window.scrollY, d = Math.abs(y - _lastTickY); _lastTickY = y;
+  _tickAcc += d;
+  if(_tickAcc >= 85){ _tickAcc = 0; tick(); }
+}, {passive:true});
 /* ============ OXIRGI O'QILGAN JOYNI ESLAB QOLISH ============ */
 var _origToggle = toggle;
 toggle = function(n){
