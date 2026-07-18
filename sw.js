@@ -1,4 +1,4 @@
-var CACHE = 'qirqhadis-v7';
+var CACHE = 'qirqhadis-v8';
 self.addEventListener('install', function(e){
   e.waitUntil(caches.open(CACHE).then(function(c){ return c.addAll(['./', './index.html', './manifest.webmanifest', './icon-192.png']); }).then(function(){ return self.skipWaiting(); }));
 });

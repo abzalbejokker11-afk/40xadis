@@ -5780,6 +5780,8 @@ function setLang(l){
   try{ localStorage.setItem('arbain_lang', l); }catch(e){}
   var c = document.querySelector('.card.open');
   if(c){ var b = c.querySelector('.card-body'); b.style.maxHeight = b.scrollHeight + 'px'; }
+  try{ if(typeof buildQHadisOptions==='function') buildQHadisOptions(); }catch(e){}
+  try{ var s2=document.getElementById('qStep2'); if(typeof qState!=='undefined' && qState && s2 && s2.style.display!=='none') renderQ(); }catch(e){}
 }
 try{
   var saved = localStorage.getItem('arbain_lang');
@@ -5886,19 +5888,45 @@ renderMemo();
 /* ================= QUIZ ================= */
 var QUIZ = JSON.parse(document.getElementById('quizData').textContent);
 var qState = null;
+/* Kirilldan lotinga o'girish (savollar faqat kirillda saqlangan) */
+function uz2lat(s){
+  if(!s) return s;
+  var map={'а':'a','б':'b','в':'v','г':'g','ғ':'gʻ','д':'d','ж':'j','з':'z','и':'i','й':'y','к':'k','қ':'q','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ў':'oʻ','ф':'f','х':'x','ҳ':'h','ц':'ts','ч':'ch','ш':'sh','ъ':'ʼ','ь':'','э':'e','ё':'yo','ю':'yu','я':'ya'};
+  var vow='аеёиоуэюяўАЕЁИОУЭЮЯЎ', bnd=' \n\t.,;:!?"«»()[]-–—/№';
+  var out='';
+  for(var i=0;i<s.length;i++){
+    var ch=s[i], low=ch.toLowerCase(), up=(ch!==low), r;
+    if(low==='е'){
+      var prev=i>0?s[i-1]:'';
+      r=(i===0||bnd.indexOf(prev)!==-1||vow.indexOf(prev)!==-1)?'ye':'e';
+    } else if(map.hasOwnProperty(low)){ r=map[low]; }
+    else { out+=ch; continue; }
+    if(up && r) r=r.charAt(0).toUpperCase()+r.slice(1);
+    out+=r;
+  }
+  return out;
+}
+function qtx(s){ return document.documentElement.getAttribute('data-lang')==='lat' ? uz2lat(s) : s; }
 var HTITLES = {};
 (function(){
   for(var n=1;n<=42;n++){
     var c = document.getElementById('h'+n);
     if(c){ var t = c.querySelector('.ttl .v-cyr'); HTITLES[n] = t ? t.textContent : ''; }
   }
+  buildQHadisOptions();
+})();
+function buildQHadisOptions(){
   var sel = document.getElementById('qHadis');
+  if(!sel || typeof HTITLES==='undefined') return;
+  var cur = sel.value;
+  sel.innerHTML='';
   for(var n=1;n<=42;n++){
     var op = document.createElement('option');
-    op.value = n; op.textContent = n + '-ҳадис. ' + HTITLES[n];
+    op.value = n; op.textContent = qtx(n + '-ҳадис. ' + HTITLES[n]);
     sel.appendChild(op);
   }
-})();
+  if(cur) sel.value = cur;
+}
 function openQuiz(){ document.getElementById('quiz').style.display='block'; document.body.style.overflow='hidden'; }
 function closeQuiz(){ document.getElementById('quiz').style.display='none'; document.body.style.overflow=''; }
 
@@ -6052,11 +6080,11 @@ function renderQ(){
   var st = qState, q = st.qs[st.i];
   document.getElementById('qProgFill').style.width = (st.i/10*100)+'%';
   document.getElementById('qCounter').textContent = (st.i+1)+' / 10';
-  document.getElementById('qQuestion').textContent = q.q;
+  document.getElementById('qQuestion').textContent = qtx(q.q);
   var box = document.getElementById('qOpts'); box.innerHTML='';
   q.o.forEach(function(opt, idx){
     var b = document.createElement('button');
-    b.className='q-opt'; b.textContent = opt;
+    b.className='q-opt'; b.textContent = qtx(opt);
     b.onclick = function(){ answer(idx, b); };
     box.appendChild(b);
   });
@@ -6077,8 +6105,8 @@ function finishQuiz(){
   show('qStep3');
   var passed = st.score >= 1; /* TEST REJIMI! Keyin: st.score >= 8 (75%+) */
   var res = document.getElementById('qResult');
-  res.innerHTML = st.name+' '+st.sur+'<br>'+st.n+'-ҳадис: <b>'+st.score+' / 10</b><br>' +
-    (passed ? '🎉 Табриклаймиз! Сертификатга лойиқсиз!' : 'Яна уриниб кўринг 🌷');
+  res.innerHTML = st.name+' '+st.sur+'<br>'+qtx(st.n+'-ҳадис')+': <b>'+st.score+' / 10</b><br>' +
+    qtx(passed ? '🎉 Табриклаймиз! Сертификатга лойиқсиз!' : 'Яна уриниб кўринг 🌷');
   document.getElementById('qCertWrap').style.display = passed ? '' : 'none';
   if(passed){
     st.certId = 'AR-'+('0'+st.n).slice(-2)+'-'+Math.random().toString(36).slice(2,8).toUpperCase();
